@@ -1,6 +1,4 @@
 # Quadwords
-TBD
-
 
 ### Contributors
 * Alex Munoz
