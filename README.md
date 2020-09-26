@@ -1,12 +1,33 @@
-# CS340-Quadwords
+# Quadwords
+TBD
 
-Github Best Practices
-	• Always work in a local branch (NOT local master). 
-		○ If you are unsure which branch you are in, type "git branch" and it will show you all branches, as well as highlight the one you are in.
-	• "git branch" should be your favorite command and you should use it freqently to ensure you are not changing your local master.
-	• Should should only have to clone the github repository one time in the beginning. For the remainder of the project, you can use "git status" to check if your local master is up to date with the remote master on git hub. If it is not, you can use "git pull" to update your local master.
 
-Assumed from here: you have a cloned github copy on your desktop, you have no unmerged branches, you want to add a new feature
+### Contributors
+* Alex Munoz
+* Kevin Joy
+
+### Technology Stack
+
+Quadwords uses a simple, lightweight technology stack.
+
+Front-End      | Back-End
+---------------|---------
+HTML           |  Node.js
+CSS	       |  Express
+Javascript     |  Handlebars
+&nbsp;         |  Session
+&nbsp;         |  My SQL
+
+
+## Github Best Practices
+
+- Always work in a local branch (NOT local master). 
+- If you are unsure which branch you are in, type "git branch" and it will show you all branches, as well as highlight the one you are in.
+- "git branch" should be your favorite command and you should use it freqently to ensure you are not changing your local master.
+- Should should only have to clone the github repository one time in the beginning. For the remainder of the project, you can use "git status" to check if your local master is up to date with the remote master on git hub. If it is not, you can use "git pull" to update your local master.
+
+
+#### Assumed from here: you have a cloned github copy on your desktop, you have no unmerged branches, you want to add a new feature
   1.  In terminal, navigate to your local github repository
   2.  Use "git branch" to determine what branch you are in
   3.  Use "git checkout master" to navigate to your local master
@@ -29,7 +50,7 @@ Log into git hub and navigate to the branch you've just created to review your c
 
 Once the code is reviewed, your programming partner can merge the code to master, and all is done!
 
-Instructions when you were accidently working in your local master branch:
+#### Instructions when you were accidentally working in your local master branch:
   1.  Run "git log" to see all commits
   2.  Find the most recent commit that is also on the remote master (git hub's master branch)
   3.  Copy the commit hash for that commit
@@ -39,4 +60,4 @@ Instructions when you were accidently working in your local master branch:
   7.  Use "git status" again to verify that your changes are still there, but now they are unstaged (they will be red).
   8.  Use "git branch <name>" to create a new branch with your current changes
 	9.  Use "git checkout <branch>" to switch to that branch
-  10. Now you can add, commit, and push to your new branch as normal.
+  10. Now you can add, commit, and push to your new branch as normal
