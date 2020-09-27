@@ -70,36 +70,53 @@ Routing
 // Home Route
 
 app.get('/', (req, res) => {
-    res.render('home');
+
+    context = {}
+    const dropTableQuery = 'DROP TABLE IF EXISTS diagnostic'
+    const makeTableQuery = 'CREATE TABLE diagnostic(id INT PRIMARY KEY, text VARCHAR(255) NOT NULL)'
+    const insertQuery = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working")'
+    const getAllQuery = 'SELECT * FROM diagnostic;'
+
+    // }
+
+    connection.query(dropTableQuery, function(err){
+        if (err) {
+            console.log("Error droping table")
+        } else {
+            connection.query(makeTableQuery, function(err){
+                if (err) {
+                    console.log("Error creating table")
+                } else {
+                    connection.query(insertQuery, function(err){
+                        if (err) {
+                            console.log("Error inserting")
+                        } else {
+                            connection.query(getAllQuery, function(err, rows, fields){
+                                if (err) {
+                                    console.log("Error with select query")
+                                } else {
+                                    context.results = JSON.stringify(rows)
+                                    res.render('home', context)
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    })
 });
 
+app.use(function(req,res){
+  res.status(404);
+  res.render('404');
+});
 
-// app.get('/', function(req, res) {
-
-//     if (req.session.loggedin) {
-//         // Simple query to make sure the database is connected.
-//         let data = 'ClearDB Connected.'
-        
-//         //Total items in catalog
-//         connection.query('SELECT COUNT(*) as numItems, COUNT(DISTINCT type) AS numTypes FROM products WHERE active is True', function(error, results, fields){
-//             if (error) {
-//                 data = 'ClearDB is down!'
-//                 console.log(error)
-//                 res.render('home', {data: data})
-//             } else {
-//                 numItems = results[0].numItems;
-//                 numTypes = results[0].numTypes;   
-//                 res.render('home', {data: data, numItems:numItems, numTypes:numTypes, dashboard: 1})
-//             }
-//         })
-
-          
-
-//     } else {
-//         res.redirect('/login')
-//         // res.send('Please login to view this page!');
-//     }
-// })
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.status(500);
+  res.render('500');
+});
 
 
 /*
