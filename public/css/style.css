@@ -1,0 +1,26 @@
+#logo {
+    font-family: 'Spartan', sans-serif;
+    font-size: xx-large;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+    width: 80%;
+}
+
+table, td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover{background-color: #ccc;}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #343A40;
+    color: white;
+}

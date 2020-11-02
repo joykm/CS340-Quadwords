@@ -10,9 +10,9 @@ Description: Entry point for "The Apple Cart" web app, Store Inventory Managemen
 Dependencies
 */
 
-const express = require('express')
-const exphbs = require('express-handlebars')
-const mysql = require('mysql')
+const express = require('express');
+const exphbs = require('express-handlebars');
+const mysql = require('mysql');
 const session = require('express-session');
 const { json } = require('express');
 
@@ -34,6 +34,7 @@ app.engine('hbs', exphbs(
     }
 ))
 app.set('view engine', 'hbs')
+
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -105,6 +106,20 @@ app.get('/', (req, res) => {
             })
         }
     })
+});
+
+// Developers, Projects, Issues Routing
+
+app.get('/developers', (req, res) => {
+    res.render('developers')
+});
+
+app.get('/projects', (req, res) => {
+    res.render('projects')
+});
+
+app.get('/issues', (req, res) => {
+    res.render('issues')
 });
 
 app.use(function(req,res){
