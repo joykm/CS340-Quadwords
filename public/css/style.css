@@ -9,7 +9,8 @@ table {
     width: 80%;
 }
 
-table, td, th {
+
+td, th {
     border: 1px solid #ddd;
     padding: 8px;
 }
@@ -24,3 +25,5 @@ th {
     background-color: #343A40;
     color: white;
 }
+
+
