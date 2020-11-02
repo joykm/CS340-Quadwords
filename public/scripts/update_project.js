@@ -6,7 +6,7 @@ is enforced in the modal. The only rule is that the maximum must be greater than
 */
 
 // Find all the product rows on the page.
-var shelf_row = document.getElementsByClassName('get_project')
+var shelf_row = document.getElementsByClassName('get-project')
 
 // Add event listeners to all the rows so when we click on them, they open a modal.
 for (var row of shelf_row) {
@@ -40,4 +40,3 @@ for (var row of shelf_row) {
         })
     }(row))
 }
-
