@@ -1,1 +1,54 @@
 <h1>Projects Page</h1>
+
+<div>
+    Note: Click the row to update
+</div>
+
+{{!-- Handlebards call to add_project_modal.hbs partial --}}
+{{> add_project_modal}}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Project ID</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status (FK)</th>
+      <th scope="col">Priority (FK)</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>eQUIPT FE-1</td>
+      <td>Draft of the eQUIPT front end</td>
+      <td>In Progress</td>
+      <td>High</td>
+      <td>10/27/20</td>
+      <td>11/02/20</td>
+      <td><button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>eQUIPT ERD/SCHEMA-2</td>
+      <td>Final version of eQUIPT ERD/SCHEMA</td>
+      <td>Complete</td>
+      <td>High</td>
+      <td>10/19/20</td>
+      <td>10/26/20</td>
+      <td><button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>eQUIPT FE-2</td>
+      <td>Final version of the eQUIPT front end</td>
+      <td>Not Started</td>
+      <td>High</td>
+      <td>11/03/20</td>
+      <td>11/09/20</td>
+      <td><button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
