@@ -40,5 +40,10 @@ for (var row of shelf_row) {
             // Bootstrap code to make the model appear
             $("#updateIssueModal").modal("show")
         })
+        // Get cell containing user assignment button and remove edit event
+        var assignedUsersButton = row.getElementsByClassName('assigned-users')[0]
+        assignedUsersButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
     }(row))
 }

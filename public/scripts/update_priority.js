@@ -26,5 +26,6 @@ for (var row of shelf_row) {
             // Bootstrap code to make the model appear
             $("#updatePriorityModal").modal("show")
         })
+
     }(row))
 }
