@@ -8,10 +8,12 @@
         </button>
       </div>
       <div class="modal-body">
-         <form>
+         {{!-- <form class="update-form" id="modal-update-developer"> --}}
+        {{!-- <form class="needs-validation" action="/inventory/modify_item" method="POST" id="modal_shelf"></form> --}}
+         <form class="update-form">
           <div class="form-group">
             <label for="modal-update-first-name" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="modal-update-first-name" placeholder="first name" required>
+            <input type="text" class="form-control" id="modal-update-first-name" name="modal-update-first-name" placeholder="first name" required>
           </div>
           <div class="form-group">
             <label for="modal-update-last-name" class="col-form-label">Last Name:</label>
@@ -27,8 +29,8 @@
           </div>
         </form>
       <div class="modal-footer d-flex justify-content-between">
-        <td><button id="deleteDeveloperBtn" type="button" class="btn btn-danger" >Delete</button></td>
-        <button id="updateDeveloperBtn" type="button" class="btn btn-primary">Save</button>
+        <td><button id="deleteDeveloperBtn" type="button" class="btn btn-danger delete-btn" >Delete</button></td>
+        <button id="updateDeveloperBtn" type="submit" class="btn btn-primary update-btn">Save</button>
       </div>
       </div>
     </div>

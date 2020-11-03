@@ -19,7 +19,7 @@ for (var row of shelf_row) {
             var dateRaised = row.querySelector('.table-date-raised').innerHTML
             var dateClosed = row.querySelector('.table-date-closed').innerHTML
             
-            // Populate the modal with the current values.
+            // Get access to the input feilds in the form.
             var modalInputName = document.querySelector('#modal-update-issue-name')
             var modalInputDescription = document.querySelector('#modal-update-issue-description')
             var modalInputProject = document.querySelector('#modal-update-issue-project')
@@ -27,15 +27,17 @@ for (var row of shelf_row) {
             var modalInputPriority = document.querySelector('#modal-update-issue-priority')
             var modalInputDateRaised = document.querySelector('#modal-update-issue-date-raised')
             var modalInputDateClosed = document.querySelector('#modal-update-issue-date-closed')
-            modalInputName = name
-            modalInputDescription = description
-            modalInputProject = project
-            modalInputStatus = status
-            modalInputPriority = priority
-            modalInputDateRaised = dateRaised
-            modalInputDateClosed= dateClosed
+
+            // Populate the input fields with the previous data.
+            modalInputName.value = name
+            modalInputDescription.value = description
+            modalInputProject.value = project
+            modalInputStatus.value = status
+            modalInputPriority.value = priority
+            modalInputDateRaised.value = dateRaised
+            modalInputDateClosed.value = dateClosed
             
-            // Bootstrap code to make the model appear
+            // Bootstrap code to make the model appear.
             $("#updateIssueModal").modal("show")
         })
         // Get cell containing user assignment button and remove edit event
