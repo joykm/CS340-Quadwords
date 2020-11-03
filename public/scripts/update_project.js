@@ -1,14 +1,13 @@
 /*
-shelves_edit.js
-Author: George Kochera, Quinn Wilkins (warehouse parts)
-Description: Enables the ability to click on a row in the inventory page and edit the shelves capacity. Data validation
-is enforced in the modal. The only rule is that the maximum must be greater than or equal to the minimum value.
+update_projects.js
+Description: Enables the ability to click a row and update the items in that row.
 */
 
-// Find all the product rows on the page.
+// Find all the rows on the page.
 var shelf_row = document.getElementsByClassName('get-project')
 
-// Add event listeners to all the rows so when we click on them, they open a modal.
+// Add event listeners to all the rows so when clicked, the update modal opens.
+// NOTE: most of this functionality won't be helpful until we connect the databases.
 for (var row of shelf_row) {
     (function (row){
         row.addEventListener('click', function(){
@@ -35,7 +34,7 @@ for (var row of shelf_row) {
             modalInputStartDate = startDate
             modalInputEndDate = endDate
 
-            // Make the modal appear.
+            // Bootstrap code to make the model appear
             $("#updateProjectModal").modal("show")
         })
     }(row))
