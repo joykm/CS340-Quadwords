@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleLabel">Update Project</h5>
+        <h5 class="modal-title" id="exampleLabel">Edit Project</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -10,17 +10,17 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Project Name:</label>
-            <input type="text" class="form-control" id="project-name" placeholder="name">
+            <label for="update-project-name" class="col-form-label">Project Name:</label>
+            <input type="text" class="form-control" id="update-project-name" placeholder="name">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="project-description" placeholder="description"></textarea>
+            <label for="update-project-description" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="update-project-description" placeholder="description"></textarea>
           </div>
         </form>
         <div class="form-group">
-            <label for="project-status">Status (Note: Will be pulled from Status Table)</label>
-            <select class="form-control">
+            <label for="update-project-status">Status (Note: Will be pulled from Status Table)</label>
+            <select class="form-control" id="update-project-status">
                 <option>...</option>
                 <option>Not Started</option> 
                 <option>In Progress</option>
@@ -28,8 +28,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="project-priority">Priority (Note: Will be pulled from Priority Table)</label>
-            <select class="form-control">
+            <label for="update-project-priority">Priority (Note: Will be pulled from Priority Table)</label>
+            <select class="form-control" id="update-project-priority">
                 <option>...</option> 
                 <option>Low</option> 
                 <option>Medium</option>
@@ -37,17 +37,17 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="project-start-date">Start Date</label>
-            <input type="date" class="form-control" id="project-name" placeholder="mm/dd/yyyy">
+            <label for="update-project-start-date">Start Date</label>
+            <input type="date" class="form-control" id="update-project-start-date" placeholder="mm/dd/yyyy">
         </div>
         <div class="form-group">
-            <label for="project-start-date">End Date</label>
-            <input type="date" class="form-control" id="project-name" placeholder="mm/dd/yyyy">
+            <label for="update-project-end-date">End Date</label>
+            <input type="date" class="form-control" id="update-project-end-date" placeholder="mm/dd/yyyy">
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-between">
-        <td><button id="deleteProjectBtn" type="button" class="btn btn-danger" >Delete Project</button></td>
-        <button id="updateProjectBtn" type="button" class="btn btn-primary">Update Project</button>
+        <td><button id="deleteProjectBtn" type="button" class="btn btn-danger" >Delete</button></td>
+        <button id="updateProjectBtn" type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

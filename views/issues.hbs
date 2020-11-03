@@ -1,1 +1,58 @@
 <h1>Issues Page</h1>
+
+<div>
+    Note: Click the row to update/delete
+</div>
+
+{{!-- Handlebars call to add_project_modal.hbs partial --}}
+{{> add_issue_modal}}
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Issue ID</th>
+      <th scope="col">Issue Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Project (FK)</th>
+      <th scope="col">Priority (FK)</th>
+      <th scope="col">Status (FK)</th>
+      <th scope="col">Date Raised</th>
+      <th scope="col">Date Closed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="get-issue">
+      <td scope="row">1</td>
+      <td class="get-name">issue-1</td>
+      <td class="get-project">eQUIPT FE-1</td>
+      <td class="get-description">example text</td>
+      <td class="get-status">Complete</td>
+      <td class="get-priority">Low</td>
+      <td class="get-date-raised">10/27/20</td>
+      <td class="get-date-closed">10/30/20</td>
+    </tr>
+    <tr class="get-issue">
+      <td scope="row">2</td>
+      <td class="get-name">issue-2</td>
+      <td class="get-project">eQUIPT ERD/SCHEMA-2</td>
+      <td class="get-description">example text</td>
+      <td class="get-status">Complete</td>
+      <td class="get-priority">Medium</td>
+      <td class="get-date-raised">10/19/20</td>
+      <td class="get-date-closed">10/22/20</td>
+    </tr>
+    <tr class="get-issue">
+      <td scope="row">3</td>
+      <td class="get-name">issue-3</td>
+      <td class="get-project">eQUIPT FE-2</td>
+      <td class="get-description">example text</td>
+      <td class="get-status">In Progress</td>
+      <td class="get-priority">High</td>
+      <td class="get-date-raised">11/02/20</td>
+      <td class="get-date-closed"></td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- Handlebars call to update_project_modal.hbs partial --}}
+{{> update_issue_modal}}

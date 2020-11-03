@@ -1,0 +1,66 @@
+<button id="addIssueBtn" data-target="#addIssueModal" type="button" class="btn btn-primary" data-toggle="modal" data-whatever="@getbootstrap" >Add Issue</button>
+
+<div id="addIssueModal" aria-labelledby="exampleLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleLabel">Add Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="add-issue-name" class="col-form-label">Issue Name:</label>
+            <input type="text" class="form-control" id="add-issue-name" placeholder="name" required>
+          </div>
+          <div class="form-group">
+            <label for="add-issue-description" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="add-issue-description" placeholder="description" required></textarea>
+          </div>
+        </form>
+        <div class="form-group">
+            <label for="add-issue-project">Project (Note: Will be pulled from Project Table)</label>
+            <select class="form-control" id="add-issue-project" required>
+                <option>...</option>
+                <option>eQUIPT FE-1</option> 
+                <option>eQUIPT ERD/SCHEMA-2</option>
+                <option>eQUIPT FE-2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="add-issue-status">Status (Note: Will be pulled from Status Table)</label>
+            <select class="form-control" id="add-issue-status" required>
+                <option>...</option>
+                <option>Not Started</option> 
+                <option>In Progress</option>
+                <option>Complete</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="add-issue-priority">Priority (Note: Will be pulled from Priority Table)</label>
+            <select class="form-control" id="add-issue-priority" required>
+                <option>...</option> 
+                <option>Low</option> 
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="add-issue-date-raised">Date Raised</label>
+            <input type="date" class="form-control" id="add-issue-date-raised" placeholder="mm/dd/yyyy" required>
+        </div>
+        <div class="form-group">
+            <label for="add-issue-date-closed">Date Closed</label>
+            <input type="date" class="form-control" id="add-issue-date-closed" placeholder="mm/dd/yyyy">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Add Issue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/add_issue.js"></script>
