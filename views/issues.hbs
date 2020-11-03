@@ -30,6 +30,9 @@
       <td class="get-priority">Low</td>
       <td class="get-date-raised">10/27/20</td>
       <td class="get-date-closed">10/30/20</td>
+      <td class="assigned-users">
+        <span class="users-btn material-icons">people_alt</span>
+      </td>
     </tr>
     <tr class="get-issue">
       <td scope="row">2</td>
@@ -40,6 +43,9 @@
       <td class="get-priority">Medium</td>
       <td class="get-date-raised">10/19/20</td>
       <td class="get-date-closed">10/22/20</td>
+      <td class="assigned-users">
+        <span class="users-btn material-icons">people_alt</span>
+      </td>
     </tr>
     <tr class="get-issue">
       <td scope="row">3</td>
@@ -50,9 +56,14 @@
       <td class="get-priority">High</td>
       <td class="get-date-raised">11/02/20</td>
       <td class="get-date-closed"></td>
+      <td class="assigned-users">
+        <span class="users-btn material-icons">people_alt</span>
+      </td>
     </tr>
   </tbody>
 </table>
 
+
+{{> view_assigned_users_modal}}
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_issue_modal}}

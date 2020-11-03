@@ -26,4 +26,11 @@ th {
     color: white;
 }
 
+.assigned-users {
+    border: none;
+    background-color: white;
+}
 
+.users-btn:hover {
+    cursor: pointer;
+}
