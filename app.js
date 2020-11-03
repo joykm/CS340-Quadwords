@@ -121,6 +121,14 @@ app.get('/issues', (req, res) => {
     res.render('issues')
 });
 
+app.get('/statuses', (req, res) => {
+    res.render('statuses')
+});
+
+app.get('/priorities', (req, res) => {
+    res.render('priorities')
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');

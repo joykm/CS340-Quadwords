@@ -1,0 +1,34 @@
+<h1>Statuses Page</h1>
+
+<div>
+    Note: Click the row to update/delete
+</div>
+
+{{!-- Handlebars call to add_project_modal.hbs partial --}}
+{{> add_status_modal}}
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Status ID</th>
+      <th scope="col">Status Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="get-status">
+      <td scope="row">1</td>
+      <td class="get-status">Not Started</td>
+    </tr>
+    <tr class="get-status">
+      <td scope="row">2</td>
+      <td class="get-status">In Progress</td>
+    </tr>
+    <tr class="get-status">
+      <td scope="row">3</td>
+      <td class="get-status">Complete</td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- Handlebars call to update_project_modal.hbs partial --}}
+{{> update_status_modal}}

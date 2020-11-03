@@ -5,8 +5,8 @@ using bootstraps "Modal" functionality.
 */
 
 // Add an event listener to the add button
-document.getElementById("addProjectBtn").addEventListener("click", function(){
+document.getElementById("addPriorityBtn").addEventListener("click", function(){
 
 	// Bootstrap code to make the model appear
-    $("#addProjectModal").modal("show")
+    $("#addPriorityModal").modal("show")
 })
