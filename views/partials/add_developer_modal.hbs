@@ -1,0 +1,39 @@
+<button id="addDeveloperBtn" data-target="#addDeveloperModal" type="button" class="btn btn-primary" data-toggle="modal" data-whatever="@getbootstrap" >Add Developer</button>
+
+<div id="addDeveloperModal" aria-labelledby="exampleLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleLabel">Add Developer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="modal-add-first-name" class="col-form-label">First Name:</label>
+            <input type="text" class="form-control" id="modal-add-first-name" placeholder="first name" required>
+          </div>
+          <div class="form-group">
+            <label for="modal-add-last-name" class="col-form-label">Last Name:</label>
+            <input type="text" class="form-control" id="modal-add-last-name" placeholder="last name" required>
+          </div>
+          <div class="form-group">
+            <label for="modal-add-title" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="modal-add-title" placeholder="title" required>
+          </div>
+          <div class="form-group">
+            <label for="modal-add-email" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="modal-add-email" placeholder="email" required>
+          </div>
+        </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Add Developer</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/add_developer.js"></script>

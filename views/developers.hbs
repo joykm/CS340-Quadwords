@@ -1,56 +1,40 @@
 <h1>Developers Page</h1>
-<h2>Dev Data</h2>
+
+<div>
+    Note: Click the row to update/delete
+</div>
+
+{{!-- Handlebars call to add_project_modal.hbs partial --}}
+{{> add_developer_modal}}
+
 <table>
+  <thead>
     <tr>
-        <th>
-            <p>Developer ID</p>
-        </th>
-        <th>
-            <p>First Name</p>
-        </th>
-        <th>
-            <p>Last Name</p>
-        </th>
-        <th>
-            <p>Title</p>
-        </th>
-        <th>
-            <p>Email Address</p>
-        </th>
+      <th scope="col">Developer ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Title</th>
+      <th scope="col">Email</th>
     </tr>
-    {{!-- sample data --}}
-    <tr>
-        <td>
-            <p>123456</p>
-        </td>
-        <td>
-            <p>Alex</p>
-        </td>
-        <td>
-            <p>Munoz</p>
-        </td>
-        <td>
-            <p>Jr. Developer</p>   
-        </td>
-        <td>
-            <p>alex.munoz@quadwords.com</p>
-        </td>
+  </thead>
+  <tbody>
+    <tr class="get-developer">
+      <td scope="row">123456</td>
+      <td class="table-first-name">Alex</td>
+      <td class="table-last-name">Munoz</td>
+      <td class="table-title">Jr. Developer</td>
+      <td class="table-email">alex.munoz@quadwords.com</td>
+
     </tr>
-    <tr>
-        <td>
-            <p>123457</p>
-        </td>
-        <td>
-            <p>Kevin</p>
-        </td>
-        <td>
-            <p>Joy</p>
-        </td>
-        <td>
-            <p>Sr. Developer</p>   
-        </td>
-        <td>
-            <p>kevin.joy@quadwords.com</p>
-        </td>
+    <tr class="get-developer">
+      <td scope="row">123456</td>
+      <td class="table-first-name">Kevin</td>
+      <td class="table-last-name">Joy</td>
+      <td class="table-title">Sr. Developer</td>
+      <td class="table-email">kevin.joy@quadwords.com</td>
     </tr>
+  </tbody>
 </table>
+
+{{!-- Handlebars call to update_project_modal.hbs partial --}}
+{{> update_developer_modal}}
