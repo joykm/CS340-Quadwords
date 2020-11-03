@@ -13,11 +13,13 @@ for (var row of shelf_row) {
             // Get the current values from the table on the screen.
             var priorityType = row.querySelector('.table-priority-type').innerHTML
             
-            // Populate the modal with the current values.
+            // Get access to the input feilds in the form.
             var modalInputPriorityType = document.querySelector('#modal-update-priority-type')
-            modalInputPriorityType = priorityType
 
-            // Bootstrap code to make the model appear
+            // Populate the input fields with the previous data.
+            modalInputPriorityType.value = priorityType
+
+            // Bootstrap code to make the model appear.
             $("#updatePriorityModal").modal("show")
         })
     }(row))

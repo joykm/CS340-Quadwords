@@ -3,10 +3,10 @@ Description: Enables the ability to click a row and update the items in that row
 */
 
 // Find all the rows on the page.
-var shelf_row = document.getElementsByClassName('table-developer')
+var table_rows = document.getElementsByClassName('table-developer')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
-for (var row of shelf_row) {
+for (var row of table_rows) {
     (function (row){
         row.addEventListener('click', function(){
 
@@ -16,17 +16,19 @@ for (var row of shelf_row) {
             var title = row.querySelector('.table-title').innerHTML
             var email = row.querySelector('.table-email').innerHTML
             
-            // Populate the modal with the current values.
+            // Get access to the input feilds in the form.
             var modalInputFirstName = document.querySelector('#modal-update-first-name')
             var modalInputLastName = document.querySelector('#modal-update-last-name')
             var modalInputTitle = document.querySelector('#modal-update-title')
             var modalInputEmail = document.querySelector('#modal-update-email')
-            modalInputFirstName = firstName
-            modalInputLastName = lastName
-            modalInputTitle = title
-            modalInputEmail = email
 
-            // Bootstrap code to make the model appear
+            // Populate the input fields with the previous data.
+            modalInputFirstName.value = firstName
+            modalInputLastName.value = lastName
+            modalInputTitle.value = title
+            modalInputEmail.value = email
+
+            // Bootstrap code to make the model appear.
             $("#updateDeveloperModal").modal("show")
         })
     }(row))

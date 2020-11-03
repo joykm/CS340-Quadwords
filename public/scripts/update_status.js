@@ -13,11 +13,13 @@ for (var row of shelf_row) {
             // Get the current values from the table on the screen.
             var statusType = row.querySelector('.table-status-type').innerHTML
                 
-            // Populate the modal with the current values.
+            // Get access to the input feilds in the form.
             var modalInputStatusType = document.querySelector('#modal-update-status-type')
-            modalInputStatusType = statusType
 
-            // Bootstrap code to make the model appear
+            // Populate the input fields with the previous data.
+            modalInputStatusType.value = statusType
+
+            // Bootstrap code to make the model appear.
             $("#updateStatusModal").modal("show")
         })
     }(row))

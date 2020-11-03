@@ -11,7 +11,12 @@
         <form>
           <div class="form-group">
             <label for="modal-update-status-type" class="col-form-label">Status Type:</label>
-            <input type="text" class="form-control" id="modal-update-status-type" placeholder="name">
+            <select class="form-control" id="modal-update-status-type" required>
+                <option>...</option>
+                <option>Not Started</option> 
+                <option>In Progress</option>
+                <option>Complete</option>
+            </select>
           </div>
       <div class="modal-footer d-flex justify-content-between">
         <td><button id="deleteStatusBtn" type="button" class="btn btn-danger" >Delete</button></td>
