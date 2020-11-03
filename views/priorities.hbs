@@ -1,7 +1,10 @@
-<h1>Priority Manager</h1>
+<h1 class="page-title">Priority Manager</h1>
 
-<div>
-    Note: Click the row to update/delete
+<div class="page-notes">
+  <div>Notes:</div>
+  <ul>
+      <li>Click the row to update/delete</li>
+  </ul> 
 </div>
 
 {{!-- Handlebars call to add_project_modal.hbs partial --}}
@@ -15,17 +18,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="get-priority">
+    <tr class="table-priority">
       <td scope="row">1</td>
-      <td class="get-priority">Low</td>
+      <td class="table-priority-type">Low</td>
     </tr>
-    <tr class="get-priority">
+    <tr class="table-priority">
       <td scope="row">2</td>
-      <td class="get-priority">Medium</td>
+      <td class="table-priority-type">Medium</td>
     </tr>
-    <tr class="get-priority">
+    <tr class="table-priority">
       <td scope="row">3</td>
-      <td class="get-priority">High</td>
+      <td class="table-priority-type">High</td>
     </tr>
   </tbody>
 </table>

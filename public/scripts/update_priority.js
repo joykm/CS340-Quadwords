@@ -1,31 +1,24 @@
 /*
-update_projects.js
 Description: Enables the ability to click a row and update the items in that row.
 */
 
 // Find all the rows on the page.
-var shelf_row = document.getElementsByClassName('get-priority')
+var shelf_row = document.getElementsByClassName('table-priority')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
-// NOTE: most of this functionality won't be helpful until we connect the databases.
 for (var row of shelf_row) {
     (function (row){
 
-        // UPDATE LATER - this is copied from project page, but wont work until database is integrated
-
         row.addEventListener('click', function(){
             // Get the current values from the table on the screen.
-            var priority = row.querySelector('.get-priority').innerHTML
+            var priorityType = row.querySelector('.table-priority-type').innerHTML
             
-                
             // Populate the modal with the current values.
-            var modalInputPriority = document.querySelector('#get-priority')
-            modalInputPriority = priority
-     
+            var modalInputPriorityType = document.querySelector('#modal-update-priority-type')
+            modalInputPriorityType = priorityType
 
             // Bootstrap code to make the model appear
             $("#updatePriorityModal").modal("show")
         })
-
     }(row))
 }
