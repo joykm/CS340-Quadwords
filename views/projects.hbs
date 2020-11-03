@@ -4,10 +4,53 @@
     Note: Click the row to update
 </div>
 
-{{!-- Handlebards call to add_project_modal.hbs partial --}}
+{{!-- Handlebars call to add_project_modal.hbs partial --}}
 {{> add_project_modal}}
 
-<table class="table">
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Project ID</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status (FK)</th>
+      <th scope="col">Priority (FK)</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="get-project">
+      <td scope="row">1</td>
+      <td class="get-name">eQUIPT FE-1</td>
+      <td class="get-description">Draft of the eQUIPT front end</td>
+      <td class="get-status">In Progress</td>
+      <td class="get-priority">High</td>
+      <td class="get-start-date">10/27/20</td>
+      <td class="get-end-date">11/02/20</td>
+    </tr>
+    <tr class="get-project">
+      <td scope="row">2</td>
+      <td class="get-name">eQUIPT ERD/SCHEMA-2</td>
+      <td class="get-description">Final version of eQUIPT ERD/SCHEMA</td>
+      <td class="get-status">Complete</td>
+      <td class="get-priority">High</td>
+      <td class="get-start-date">10/19/20</td>
+      <td class="get-end-date">10/26/20</td>
+    </tr>
+    <tr class="get-project">
+      <td scope="row">3</td>
+      <td class="get-name">eQUIPT FE-2</td>
+      <td class="get-description">Final version of the eQUIPT front end</td>
+      <td class="get-status">Not Started</td>
+      <td class="get-priority">High</td>
+      <td class="get-start-date">11/03/20</td>
+      <td class="get-end-date">11/09/20</td>
+    </tr>
+  </tbody>
+</table>
+
+{{!-- <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Project ID</th>
@@ -28,7 +71,6 @@
       <td class="get-priority">High</td>
       <td class="get-start-date">10/27/20</td>
       <td class="get-end-date">11/02/20</td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
     </tr>
     <tr class="get-project">
       <th scope="row">2</th>
@@ -38,7 +80,6 @@
       <td class="get-priority">High</td>
       <td class="get-start-date">10/19/20</td>
       <td class="get-end-date">10/26/20</td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
     </tr>
     <tr class="get-project">
       <th scope="row">3</th>
@@ -48,9 +89,9 @@
       <td class="get-priority">High</td>
       <td class="get-start-date">11/03/20</td>
       <td class="get-end-date">11/09/20</td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
     </tr>
   </tbody>
-</table>
+</table> --}}
 
-{{!-- {{> updateProjectModal}} --}}
+{{!-- Handlebars call to update_project_modal.hbs partial --}}
+{{> update_project_modal}}

@@ -69,7 +69,6 @@ Routing
 
 
 // Home Route
-
 app.get('/', (req, res) => {
 
     context = {}
