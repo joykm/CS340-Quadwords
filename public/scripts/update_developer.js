@@ -1,13 +1,11 @@
 /*
-update_projects.js
 Description: Enables the ability to click a row and update the items in that row.
 */
 
 // Find all the rows on the page.
-var shelf_row = document.getElementsByClassName('get-developer')
+var shelf_row = document.getElementsByClassName('table-developer')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
-// NOTE: most of this functionality won't be helpful until we connect the databases.
 for (var row of shelf_row) {
     (function (row){
         row.addEventListener('click', function(){

@@ -1,32 +1,30 @@
 /*
-update_projects.js
 Description: Enables the ability to click a row and update the items in that row.
 */
 
 // Find all the rows on the page.
-var shelf_row = document.getElementsByClassName('get-project')
+var shelf_row = document.getElementsByClassName('table-project')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
-// NOTE: most of this functionality won't be helpful until we connect the databases.
 for (var row of shelf_row) {
     (function (row){
         row.addEventListener('click', function(){
             
             // Get the current values from the table on the screen.
-            var name = row.querySelector('.get-name').innerHTML
-            var description = row.querySelector('.get-description').innerHTML
-            var status = row.querySelector('.get-status').innerHTML
-            var priority = row.querySelector('.get-priority').innerHTML
-            var startDate = row.querySelector('.get-start-date').innerHTML
-            var endDate = row.querySelector('.get-end-date').innerHTML
+            var name = row.querySelector('.table-name').innerHTML
+            var description = row.querySelector('.table-description').innerHTML
+            var status = row.querySelector('.table-status').innerHTML
+            var priority = row.querySelector('.table-priority').innerHTML
+            var startDate = row.querySelector('.table-start-date').innerHTML
+            var endDate = row.querySelector('.table-end-date').innerHTML
             
             // Populate the modal with the current values.
-            var modalInputName = document.querySelector('#get-name')
-            var modalInputDescription = document.querySelector('#get-description')
-            var modalInputStatus = document.querySelector('#get-status')
-            var modalInputPriority = document.querySelector('#get-priority')
-            var modalInputStartDate = document.querySelector('#get-start-date')
-            var modalInputEndDate = document.querySelector('#get-end-date')
+            var modalInputName = document.querySelector('#modal-update-project-name')
+            var modalInputDescription = document.querySelector('#modal-update-project-description')
+            var modalInputStatus = document.querySelector('#modal-update-project-status')
+            var modalInputPriority = document.querySelector('#modal-update-project-priority')
+            var modalInputStartDate = document.querySelector('#modal-update-project-start-date')
+            var modalInputEndDate = document.querySelector('#modal-update-project-end-date')
             modalInputName = name
             modalInputDescription = description
             modalInputStatus = status

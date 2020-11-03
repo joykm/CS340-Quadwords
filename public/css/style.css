@@ -1,14 +1,44 @@
+/******
+
+Navbar 
+
+*******/
+
 #logo {
     font-family: 'Spartan', sans-serif;
     font-size: xx-large;
 }
 
-table {
-    border-collapse: collapse;
+
+/******
+
+Body 
+
+******/
+
+.main-body {
     margin: auto;
     width: 80%;
 }
 
+.page-title {
+    margin-top: .5rem;
+}
+
+/* Add Modal */
+
+.add-btn {
+    margin-bottom: .75rem;
+}
+
+
+/* Tables */
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+    width: 100%;
+}
 
 td, th {
     border: 1px solid #ddd;

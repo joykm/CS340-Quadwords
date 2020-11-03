@@ -1,7 +1,10 @@
-<h1>Status Manager</h1>
+<h1 class="page-title">Status Manager</h1>
 
-<div>
-    Note: Click the row to update/delete
+<div class="page-notes">
+  <div>Notes:</div>
+  <ul>
+      <li>Click the row to update/delete</li>
+  </ul> 
 </div>
 
 {{!-- Handlebars call to add_project_modal.hbs partial --}}
@@ -15,17 +18,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="get-status">
+    <tr class="table-status">
       <td scope="row">1</td>
-      <td class="get-status">Not Started</td>
+      <td class="table-status-type">Not Started</td>
     </tr>
-    <tr class="get-status">
+    <tr class="table-status">
       <td scope="row">2</td>
-      <td class="get-status">In Progress</td>
+      <td class="table-status-type">In Progress</td>
     </tr>
-    <tr class="get-status">
+    <tr class="table-status">
       <td scope="row">3</td>
-      <td class="get-status">Complete</td>
+      <td class="table-status-type">Complete</td>
     </tr>
   </tbody>
 </table>
