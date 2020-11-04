@@ -13,16 +13,16 @@
         <form>
           <div class="form-group">
             <label for="add-project-name" class="col-form-label">Project Name:</label>
-            <input type="text" class="form-control" id="add-project-name" placeholder="name">
+            <input type="text" class="form-control" id="add-project-name" placeholder="name" required>
           </div>
           <div class="form-group">
             <label for="add-project-description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="add-project-description" placeholder="description"></textarea>
+            <textarea class="form-control" id="add-project-description" placeholder="description" required></textarea>
           </div>
         </form>
         <div class="form-group">
             <label for="add-project-status">Status (Note: Will be pulled from Status Table)</label>
-            <select class="form-control" id="add-project-status">
+            <select class="form-control" id="add-project-status" required>
                 <option>...</option>
                 <option>Not Started</option> 
                 <option>In Progress</option>
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="add-project-priority">Priority (Note: Will be pulled from Priority Table)</label>
-            <select class="form-control" id="add-project-priority">
+            <select class="form-control" id="add-project-priority" required>
                 <option>...</option> 
                 <option>Low</option> 
                 <option>Medium</option>
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label for="add-project-start-date">Start Date</label>
-            <input type="date" class="form-control" id="add-project-start-date" placeholder="mm/dd/yyyy">
+            <input type="date" class="form-control" id="add-project-start-date" placeholder="mm/dd/yyyy" required>
         </div>
         <div class="form-group">
             <label for="add-project-end-date">End Date</label>
