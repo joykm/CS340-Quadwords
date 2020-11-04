@@ -8,47 +8,47 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form class="update-form">
           <div class="form-group">
             <label for="modal-update-project-name" class="col-form-label">Project Name:</label>
-            <input type="text" class="form-control" id="modal-update-project-name" placeholder="name">
+            <input type="text" class="form-control" id="modal-update-project-name" placeholder="name" required>
           </div>
           <div class="form-group">
             <label for="modal-update-project-description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="modal-update-project-description" placeholder="description"></textarea>
+            <textarea class="form-control" id="modal-update-project-description" placeholder="description" required></textarea>
           </div>
-        </form>
-        <div class="form-group">
-            <label for="modal-update-project-status">Status (Note: Will be pulled from Status Table)</label>
-            <select class="form-control" id="modal-update-project-status">
-                <option>...</option>
-                <option>Not Started</option> 
-                <option>In Progress</option>
-                <option>Complete</option>
-            </select>
+          <div class="form-group">
+              <label for="modal-update-project-status">Status (Note: Will be pulled from Status Table)</label>
+              <select class="form-control" id="modal-update-project-status" required>
+                  <option>...</option>
+                  <option>Not Started</option> 
+                  <option>In Progress</option>
+                  <option>Complete</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal-update-project-priority">Priority (Note: Will be pulled from Priority Table)</label>
+              <select class="form-control" id="modal-update-project-priority" required>
+                  <option>...</option> 
+                  <option>Low</option> 
+                  <option>Medium</option>
+                  <option>High</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal-update-project-start-date">Start Date</label>
+              <input type="date" class="form-control" id="modal-update-project-start-date" placeholder="mm/dd/yyyy" required>
+          </div>
+          <div class="form-group">
+              <label for="modal-update-project-end-date">End Date</label>
+              <input type="date" class="form-control" id="modal-update-project-end-date" placeholder="mm/dd/yyyy">
+          </div>
         </div>
-        <div class="form-group">
-            <label for="modal-update-project-priority">Priority (Note: Will be pulled from Priority Table)</label>
-            <select class="form-control" id="modal-update-project-priority">
-                <option>...</option> 
-                <option>Low</option> 
-                <option>Medium</option>
-                <option>High</option>
-            </select>
+        <div class="modal-footer d-flex justify-content-between">
+          <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>
+          <button id="update-btn" type="submit" class="btn btn-primary update-btn">Save</button>
         </div>
-        <div class="form-group">
-            <label for="modal-update-project-start-date">Start Date</label>
-            <input type="date" class="form-control" id="modal-update-project-start-date" placeholder="mm/dd/yyyy">
-        </div>
-        <div class="form-group">
-            <label for="modal-update-project-end-date">End Date</label>
-            <input type="date" class="form-control" id="modal-update-project-end-date" placeholder="mm/dd/yyyy">
-        </div>
-      </div>
-      <div class="modal-footer d-flex justify-content-between">
-        <td><button id="deleteProjectBtn" type="button" class="btn btn-danger" >Delete</button></td>
-        <button id="updateProjectBtn" type="button" class="btn btn-primary">Save</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
