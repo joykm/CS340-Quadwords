@@ -27,6 +27,9 @@
       <td class="table-last-name">Munoz</td>
       <td class="table-title">Jr. Developer</td>
       <td class="table-email">alex.munoz@quadwords.com</td>
+      <td class="assigned-users">
+        <span class="users-btn material-icons">people_alt</span>
+      </td>
 
     </tr>
     <tr class="table-developer">
@@ -35,9 +38,15 @@
       <td class="table-last-name">Joy</td>
       <td class="table-title">Sr. Developer</td>
       <td class="table-email">kevin.joy@quadwords.com</td>
+      <td class="assigned-users">
+        <span class="users-btn material-icons">people_alt</span>
+      </td>
     </tr>
   </tbody>
 </table>
+
+{{!-- Handlebars call to view_assigned_users_modal.hbs partial --}}
+{{> view_assigned_users_modal}}
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_developer_modal}}
