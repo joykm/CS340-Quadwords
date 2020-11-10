@@ -7,19 +7,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {{!-- html is recognizing this div as a form (i don't know why). It strips any form tags within this out of the code. --}}
-      <div class="modal-body update-form">
-          <div class="form-group">
-            <label for="modal-update-status-type" class="col-form-label">Status Type:</label>
-            <input type="text" class="form-control" id="modal-update-status-type" placeholder="status type" required>
-          </div>
-
+      <div class="modal-body">
+         <form class="update-form">
+          {{!-- <div class="form-group"> --}}
+            <label for="modal-update-status-type" class="col-form-label">First Name:</label>
+            <input type="text" class="form-control" id="modal-update-status-type" name="modal-update-status" placeholder="status" required>
+          {{!-- </div> --}}
+        
           <div class="modal-footer d-flex justify-content-between">
-            <button id="delete-btn" type="button" class="btn btn-danger delete-btn">Delete</button>
+            <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>
             <button id="update-btn" type="submit" class="btn btn-primary update-btn">Save</button>
           </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <script src="/scripts/update_status.js"></script>
+
+
+
