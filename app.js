@@ -110,8 +110,23 @@ app.get('/', (req, res) => {
 // Developers, Projects, Issues Routing
 
 app.get('/developers', (req, res) => {
-    res.render('developers')
+
+    // Query to clear db
+    const developerQueryString = 'SELECT * FROM developers'
+
+    // Requesting the data from the database
+    connection.query(developerQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            console.log({results: results, developers: 1})
+            res.render('developers', {results: results, developers: 1})
+        }
+    })
 });
+
+
 
 app.get('/projects', (req, res) => {
     res.render('projects')
