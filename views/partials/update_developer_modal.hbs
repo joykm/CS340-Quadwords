@@ -8,23 +8,23 @@
         </button>
       </div>
       <div class="modal-body">
-         <form class="update-form">
-          <input type="hidden" id="modal-dev-id" readonly>
+         <form class="update-form" action="/developers/update_developer" method="post">
+          <input type="hidden" id="modal_update_developerId" name="modal_update_developerId" readonly>
           <div class="form-group">
             <label for="modal-update-first-name" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="modal-update-first-name" name="modal-update-first-name" placeholder="first name" required>
+            <input type="text" class="form-control" id="modal_update_first_name" name="modal_update_first_name"  placeholder="first name" required>
           </div>
           <div class="form-group">
             <label for="modal-update-last-name" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="modal-update-last-name" placeholder="last name" required>
+            <input type="text" class="form-control" id="modal_update_last_name" name="modal_update_last_name" placeholder="last name" required>
           </div>
           <div class="form-group">
             <label for="modal-update-title" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="modal-update-title" placeholder="title" required>
+            <input type="text" class="form-control" id="modal_update_title" name="modal_update_title" placeholder="title" required>
           </div>
           <div class="form-group">
             <label for="modal-update-email" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="modal-update-email" placeholder="email" required>
+            <input type="text" class="form-control" id="modal_update_email" name="modal_update_email" placeholder="email" required>
           </div>
         
           <div class="modal-footer d-flex justify-content-between">
