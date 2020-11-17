@@ -11,18 +11,21 @@ for (var row of table_rows) {
         row.addEventListener('click', function(){
 
             // Get the current values from the table on the screen.
+            var devId = row.querySelector('.table-id').innerHTML
             var firstName = row.querySelector('.table-first-name').innerHTML
             var lastName = row.querySelector('.table-last-name').innerHTML
             var title = row.querySelector('.table-title').innerHTML
             var email = row.querySelector('.table-email').innerHTML
             
             // Get access to the input feilds in the form.
+            var modalDevId = document.querySelector('#modal-dev-id')
             var modalInputFirstName = document.querySelector('#modal-update-first-name')
             var modalInputLastName = document.querySelector('#modal-update-last-name')
             var modalInputTitle = document.querySelector('#modal-update-title')
             var modalInputEmail = document.querySelector('#modal-update-email')
 
             // Populate the input fields with the previous data.
+            modalDevId = devId
             modalInputFirstName.value = firstName
             modalInputLastName.value = lastName
             modalInputTitle.value = title
