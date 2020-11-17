@@ -172,11 +172,11 @@ app.delete('/developers/delete_developer', function(req, res) {
         // Send the query, if it fails, log to console, if it succeeds, update the screen.
         connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
         if (error) {
-            console.log('Error deleting developer to developers table: ' + error)
-            res.send('Error deleting developer to developers table: ' + error)
+            console.log('Error deleting developer to developers table: ' + error);
+            res.send('Error deleting developer to developers table: ' + error);
         } else {
-        	console.log("No error")
-            res.redirect('/developers')
+            console.log("No error");
+            res.redirect(303, '/developers');
         }
     });
 
