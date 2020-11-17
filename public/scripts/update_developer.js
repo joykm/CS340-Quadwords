@@ -64,6 +64,7 @@ deleteBtn.addEventListener("click", function() {
     request.addEventListener("load", function() {
         if (request.status >= 200 && request.status < 400) {
             console.log("Record Deleted");
+            location.reload();
         } else {
             console.log("There was an error deleting this developer.");
         }

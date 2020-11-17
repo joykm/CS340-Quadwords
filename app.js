@@ -161,7 +161,7 @@ app.post('/developers/new_developer', function(req, res) {
 app.delete('/developers/delete_developer', function(req, res) {
 
         // Grab the necessary data from the POST request body
-        const devId = req.body.modal_update_id;
+        const devId = req.body.id;
 
         // DB Query Strings
         const developerDeleteQueryString =
@@ -175,7 +175,6 @@ app.delete('/developers/delete_developer', function(req, res) {
             console.log('Error deleting developer to developers table: ' + error);
             res.send('Error deleting developer to developers table: ' + error);
         } else {
-            console.log("No error");
             res.redirect(303, '/developers');
         }
     });
