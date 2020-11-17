@@ -155,7 +155,7 @@ app.post('/developers/new_developer', function(req, res) {
 app.post('/developers/update_developer', function(req, res) {
 
     // Grab the necessary data from the POST request body.
-    const developerId = req.body.modal_update_developerId;
+    const developerID = req.body.modal_update_developerID;
     const firstName = req.body.modal_update_first_name;
     const lastName = req.body.modal_update_last_name;
     const title = req.body.modal_update_title;
@@ -163,9 +163,9 @@ app.post('/developers/update_developer', function(req, res) {
 
     // DB Query String. Designed with array below to prevent SQL injection.
     const developerInsertQueryString =
-        "UPDATE developers SET firstName = ?, lastName = ?, title = ?, email = ? WHERE developerId = ?"
+        "UPDATE developers SET firstName = ?, lastName = ?, title = ?, email = ? WHERE developerID = ?"
     
-    const newDeveloperValues = [firstName, lastName, title, email, developerId]
+    const newDeveloperValues = [firstName, lastName, title, email, developerID]
 
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
     connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
@@ -182,13 +182,13 @@ app.post('/developers/update_developer', function(req, res) {
 app.delete('/developers/delete_developer', function(req, res) {
 
         // Grab the necessary data from the POST request body
-        const developerId = req.body.developerId;
+        const developerID = req.body.developerID;
 
         // DB Query String. Designed with array below to prevent SQL injection.
         const developerDeleteQueryString =
-            "DELETE FROM developers WHERE developerId=?"
+            "DELETE FROM developers WHERE developerID = ?"
 
-        const deleteDeveloperValue = [developerId]
+        const deleteDeveloperValue = [developerID]
 
         // Send the query, if it fails, log to console, if it succeeds, update the screen.
         connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){

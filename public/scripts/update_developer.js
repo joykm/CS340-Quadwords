@@ -11,21 +11,21 @@ for (var row of table_rows) {
         row.addEventListener('click', function(){
 
             // Get the current values from the table on the screen.
-            var developerId = row.querySelector('.table-id').innerHTML
+            var developerID = row.querySelector('.table-id').innerHTML
             var firstName = row.querySelector('.table-first-name').innerHTML
             var lastName = row.querySelector('.table-last-name').innerHTML
             var title = row.querySelector('.table-title').innerHTML
             var email = row.querySelector('.table-email').innerHTML
             
             // Get access to the input feilds in the form.
-            var modalDevId = document.querySelector('#modal_update_developerId')
+            var modalDevID = document.querySelector('#modal_update_developerID')
             var modalInputFirstName = document.querySelector('#modal_update_first_name')
             var modalInputLastName = document.querySelector('#modal_update_last_name')
             var modalInputTitle = document.querySelector('#modal_update_title')
             var modalInputEmail = document.querySelector('#modal_update_email')
 
             // Populate the input fields with the previous data.
-            modalDevId.value = developerId
+            modalDevID.value = developerID
             modalInputFirstName.value = firstName
             modalInputLastName.value = lastName
             modalInputTitle.value = title
@@ -52,12 +52,12 @@ form.addEventListener('submit', function(event) {
 var deleteBtn = document.getElementById("delete-btn")
 deleteBtn.addEventListener("click", function() {
     // Retrieve Current Developer ID
-    var developerId = document.querySelector('#modal_update_developerId').value
-    console.log(developerId)
+    var developerID = document.querySelector('#modal_update_developerID').value
+    console.log(developerID)
 
     // Create Request and Payload
     let request = new XMLHttpRequest();
-    let payload = {developerId: developerId}
+    let payload = {developerID: developerID}
     console.log(payload)
 
     //Process Delete Request to Server
