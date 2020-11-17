@@ -155,7 +155,32 @@ app.post('/developers/new_developer', function(req, res) {
         	console.log("No error")
             res.redirect('/developers')
         }
-    })
+    });
+})
+
+app.delete('/developers/delete_developer', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const devId = req.body.modal_update_id;
+
+        // DB Query Strings
+        const developerDeleteQueryString =
+            "DELETE FROM developers WHERE id=?"
+
+        const deleteDeveloperValue = [devId]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting developer to developers table: ' + error)
+            res.send('Error deleting developer to developers table: ' + error)
+        } else {
+        	console.log("No error")
+            res.redirect('/developers')
+        }
+    });
+
+
 })
 
 
