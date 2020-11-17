@@ -25,7 +25,7 @@ for (var row of table_rows) {
             var modalInputEmail = document.querySelector('#modal-update-email')
 
             // Populate the input fields with the previous data.
-            modalDevId = devId
+            modalDevId.value = devId
             modalInputFirstName.value = firstName
             modalInputLastName.value = lastName
             modalInputTitle.value = title
@@ -51,7 +51,23 @@ form.addEventListener('submit', function(event) {
 // Event listener on delete button within modal form
 var deleteBtn = document.getElementById("delete-btn")
 deleteBtn.addEventListener("click", function() {
-    // Add a delete confirmation here, as well as delete confirmation funcitonality
-    alert("Are you sure you want to delete this row?")
+    // Retrieve Current Developer ID
+    var devId = document.querySelector('#modal-dev-id').value
 
-})
+    // Create Request and Payload
+    let request = new XMLHttpRequest();
+    let payload = {id: devId}
+
+    //Process Delete Request to Server
+    request.open("delete", "/developers/delete_developer", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.addEventListener("load", function() {
+        if (request.status >= 200 && request.status < 400) {
+            console.log("Record Deleted");
+        } else {
+            console.log("There was an error deleting this developer.");
+        }
+    });
+    request.send(JSON.stringify(payload));
+    event.preventDefault();
+});
