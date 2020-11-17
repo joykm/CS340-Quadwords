@@ -165,7 +165,7 @@ app.delete('/developers/delete_developer', function(req, res) {
 
         // DB Query Strings
         const developerDeleteQueryString =
-            "DELETE FROM developers WHERE id=?"
+            "DELETE FROM developers WHERE developerID=?"
 
         const deleteDeveloperValue = [devId]
 
