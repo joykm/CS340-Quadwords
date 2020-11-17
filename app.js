@@ -107,11 +107,10 @@ app.get('/', (req, res) => {
     })
 });
 
-// Developers, Projects, Issues Routing
-
+// GET Developer Request
 app.get('/developers', (req, res) => {
 
-    // Query to clear db
+    // DB Query String.
     const developerQueryString = 'SELECT * FROM developers'
 
     // Requesting the data from the database
@@ -126,21 +125,16 @@ app.get('/developers', (req, res) => {
     })
 });
 
+// INSERT Developer Request
 app.post('/developers/new_developer', function(req, res) {
 
-    // Grab the necessary data from the POST request body
+    // Grab the necessary data from the POST request body.
     const firstName = req.body.modal_add_first_name;
     const lastName = req.body.modal_add_last_name;
     const title = req.body.modal_add_title;
     const email = req.body.modal_add_email;
 
-    // Change this to change the query going to the DB
-    /* If adding duplicate item, nothing will change
-       If adding inactive item, active will change from false to true
-       else insert as normal.
-       If we ever want to change this function to add and update, we 
-       can just add more columns after update*/
-
+    // DB Query String. Designed with array below to prevent SQL injection.
     const developerInsertQueryString =
         "INSERT INTO developers (firstName, lastName, title, email) VALUES (?, ?, ?, ?)"
     
@@ -152,22 +146,49 @@ app.post('/developers/new_developer', function(req, res) {
             console.log('Error adding developer to developers table: ' + error)
             res.send('Error adding developer to developers table: ' + error)
         } else {
-        	console.log("No error")
             res.redirect('/developers')
         }
     });
 })
 
+// UPDATE Developer Request
+app.post('/developers/update_developer', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const developerId = req.body.modal_update_developerId;
+    const firstName = req.body.modal_update_first_name;
+    const lastName = req.body.modal_update_last_name;
+    const title = req.body.modal_update_title;
+    const email = req.body.modal_update_email;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const developerInsertQueryString =
+        "UPDATE developers SET firstName = ?, lastName = ?, title = ?, email = ? WHERE developerId = ?"
+    
+    const newDeveloperValues = [firstName, lastName, title, email, developerId]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
+        if (error) {
+            console.log('Error adding developer to developers table: ' + error)
+            res.send('Error adding developer to developers table: ' + error)
+        } else {
+            res.redirect('/developers')
+        }
+    });
+})
+
+// DELETE Developer Request
 app.delete('/developers/delete_developer', function(req, res) {
 
         // Grab the necessary data from the POST request body
-        const devId = req.body.id;
+        const developerId = req.body.developerId;
 
-        // DB Query Strings
+        // DB Query String. Designed with array below to prevent SQL injection.
         const developerDeleteQueryString =
-            "DELETE FROM developers WHERE developerID=?"
+            "DELETE FROM developers WHERE developerId=?"
 
-        const deleteDeveloperValue = [devId]
+        const deleteDeveloperValue = [developerId]
 
         // Send the query, if it fails, log to console, if it succeeds, update the screen.
         connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
@@ -183,19 +204,22 @@ app.delete('/developers/delete_developer', function(req, res) {
 })
 
 
-
+// GET Project Request
 app.get('/projects', (req, res) => {
     res.render('projects')
 });
 
+// GET Issues Request
 app.get('/issues', (req, res) => {
     res.render('issues')
 });
 
+// GET Statuses Request
 app.get('/statuses', (req, res) => {
     res.render('statuses')
 });
 
+// GET Priorities Request
 app.get('/priorities', (req, res) => {
     res.render('priorities')
 });

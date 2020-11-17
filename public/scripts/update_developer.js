@@ -11,21 +11,21 @@ for (var row of table_rows) {
         row.addEventListener('click', function(){
 
             // Get the current values from the table on the screen.
-            var devId = row.querySelector('.table-id').innerHTML
+            var developerId = row.querySelector('.table-id').innerHTML
             var firstName = row.querySelector('.table-first-name').innerHTML
             var lastName = row.querySelector('.table-last-name').innerHTML
             var title = row.querySelector('.table-title').innerHTML
             var email = row.querySelector('.table-email').innerHTML
             
             // Get access to the input feilds in the form.
-            var modalDevId = document.querySelector('#modal-dev-id')
-            var modalInputFirstName = document.querySelector('#modal-update-first-name')
-            var modalInputLastName = document.querySelector('#modal-update-last-name')
-            var modalInputTitle = document.querySelector('#modal-update-title')
-            var modalInputEmail = document.querySelector('#modal-update-email')
+            var modalDevId = document.querySelector('#modal_update_developerId')
+            var modalInputFirstName = document.querySelector('#modal_update_first_name')
+            var modalInputLastName = document.querySelector('#modal_update_last_name')
+            var modalInputTitle = document.querySelector('#modal_update_title')
+            var modalInputEmail = document.querySelector('#modal_update_email')
 
             // Populate the input fields with the previous data.
-            modalDevId.value = devId
+            modalDevId.value = developerId
             modalInputFirstName.value = firstName
             modalInputLastName.value = lastName
             modalInputTitle.value = title
@@ -52,11 +52,13 @@ form.addEventListener('submit', function(event) {
 var deleteBtn = document.getElementById("delete-btn")
 deleteBtn.addEventListener("click", function() {
     // Retrieve Current Developer ID
-    var devId = document.querySelector('#modal-dev-id').value
+    var developerId = document.querySelector('#modal_update_developerId').value
+    console.log(developerId)
 
     // Create Request and Payload
     let request = new XMLHttpRequest();
-    let payload = {id: devId}
+    let payload = {developerId: developerId}
+    console.log(payload)
 
     //Process Delete Request to Server
     request.open("delete", "/developers/delete_developer", true);
