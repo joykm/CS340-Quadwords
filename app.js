@@ -129,7 +129,7 @@ app.get('/developers', (req, res) => {
 app.post('/developers/new_developer', function(req, res) {
 
     // Grab the necessary data from the POST request body
-    const firstName = req.body.modal_add_fist_name;
+    const firstName = req.body.modal_add_first_name;
     const lastName = req.body.modal_add_last_name;
     const title = req.body.modal_add_title;
     const email = req.body.modal_add_email;
@@ -141,12 +141,13 @@ app.post('/developers/new_developer', function(req, res) {
        If we ever want to change this function to add and update, we 
        can just add more columns after update*/
 
-    const newDeveloperString =
-        `INSERT INTO developers (firstName, lastName, title, email) VALUES
-        ('${firstName}', '${lastName}', '${title}', '${email}')`
+    const developerInsertQueryString =
+        "INSERT INTO developers (firstName, lastName, title, email) VALUES (?, ?, ?, ?)"
+    
+    const newDeveloperValues = [firstName, lastName, title, email]
 
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(newDeveloperString, function(error, results, fields){
+    connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
         if (error) {
             console.log('Error adding developer to developers table: ' + error)
             res.send('Error adding developer to developers table: ' + error)
