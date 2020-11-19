@@ -24,42 +24,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table-project">
-      <td scope="row">1</td>
-      <td class="table-name">eQUIPT FE-1</td>
-      <td class="table-description">Draft of the eQUIPT front end</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-start-date">10/27/20</td>
-      <td class="table-end-date">11/02/20</td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
-    <tr class="table-project">
-      <td scope="row">2</td>
-      <td class="table-name">eQUIPT ERD/SCHEMA-2</td>
-      <td class="table-description">Final version of eQUIPT ERD/SCHEMA</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-start-date">10/19/20</td>
-      <td class="table-end-date">10/26/20</td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
-    <tr class="table-project">
-      <td scope="row">3</td>
-      <td class="table-name">eQUIPT FE-2</td>
-      <td class="table-description">Final version of the eQUIPT front end</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-start-date">11/03/20</td>
-      <td class="table-end-date">11/09/20</td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
+    {{!-- Handlebars building dynamic table in html --}}
+    {{#each results}}
+      {{#if name}}
+        <tr class="table-project">
+          <td scope="row" class="table-id">{{projectID}}</td>
+          <td class="table-name">{{name}}</td>
+          <td class="table-description">{{description}}</td>
+          <td class="table-statusID">{{statusID}}</td>
+          <td class="table-priorityID">{{priorityID}}</td>
+          <td class="table-startDate">{{startDate}}</td>
+          <td class="table-endDate">{{endDate}}</td>
+          <td class="assigned-users">
+            <span class="users-btn material-icons">people_alt</span>
+          </td>
+        </tr>
+      {{/if}}
+    {{/each}}
   </tbody>
 </table>
 

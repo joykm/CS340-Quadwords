@@ -107,14 +107,18 @@ app.get('/', (req, res) => {
     })
 });
 
+// ***
+// Developer Routes
+// ***
+
 // GET Developer Request
 app.get('/developers', (req, res) => {
 
     // DB Query String.
-    const developerQueryString = 'SELECT * FROM developers'
+    const developersQueryString = 'SELECT * FROM developers'
 
     // Requesting the data from the database
-    connection.query(developerQueryString, function(error, results, fields){
+    connection.query(developersQueryString, function(error, results, fields){
         if (error) {
             console.log('Error loading developers: ' + error)
             res.send('Error loading developers: ' + error)
@@ -135,13 +139,13 @@ app.post('/developers/new_developer', function(req, res) {
     const email = req.body.modal_add_email;
 
     // DB Query String. Designed with array below to prevent SQL injection.
-    const developerInsertQueryString =
+    const developersInsertQueryString =
         "INSERT INTO developers (firstName, lastName, title, email) VALUES (?, ?, ?, ?)"
     
     const newDeveloperValues = [firstName, lastName, title, email]
 
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
+    connection.query(developersInsertQueryString, newDeveloperValues, function(error, results, fields){
         if (error) {
             console.log('Error adding developer to developers table: ' + error)
             res.send('Error adding developer to developers table: ' + error)
@@ -162,13 +166,13 @@ app.post('/developers/update_developer', function(req, res) {
     const email = req.body.modal_update_email;
 
     // DB Query String. Designed with array below to prevent SQL injection.
-    const developerInsertQueryString =
+    const developersUpdateQueryString =
         "UPDATE developers SET firstName = ?, lastName = ?, title = ?, email = ? WHERE developerID = ?"
     
     const newDeveloperValues = [firstName, lastName, title, email, developerID]
 
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
+    connection.query(developersUpdateQueryString, newDeveloperValues, function(error, results, fields){
         if (error) {
             console.log('Error adding developer to developers table: ' + error)
             res.send('Error adding developer to developers table: ' + error)
@@ -185,13 +189,13 @@ app.delete('/developers/delete_developer', function(req, res) {
         const developerID = req.body.developerID;
 
         // DB Query String. Designed with array below to prevent SQL injection.
-        const developerDeleteQueryString =
+        const developersDeleteQueryString =
             "DELETE FROM developers WHERE developerID = ?"
 
         const deleteDeveloperValue = [developerID]
 
         // Send the query, if it fails, log to console, if it succeeds, update the screen.
-        connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
+        connection.query(developersDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
         if (error) {
             console.log('Error deleting developer to developers table: ' + error);
             res.send('Error deleting developer to developers table: ' + error);
@@ -203,21 +207,51 @@ app.delete('/developers/delete_developer', function(req, res) {
 
 })
 
+// ***
+// Project Routes
+// ***
 
 // GET Project Request
 app.get('/projects', (req, res) => {
-    res.render('projects')
+    // DB Query String.
+    const projectsQueryString = 
+    `SELECT projectID, name, description, statusID, priorityID, 
+    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
+    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects`
+
+    // Requesting the data from the database
+    connection.query(projectsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, projects: 1})
+            res.render('projects', {results: results, projects: 1})
+        }
+    })
 });
+
+// ***
+// Issues Routes
+// ***
 
 // GET Issues Request
 app.get('/issues', (req, res) => {
     res.render('issues')
 });
 
+// ***
+// Statuses Routes
+// ***
+
 // GET Statuses Request
 app.get('/statuses', (req, res) => {
     res.render('statuses')
 });
+
+// ***
+// Priorities Routes
+// ***
 
 // GET Priorities Request
 app.get('/priorities', (req, res) => {
