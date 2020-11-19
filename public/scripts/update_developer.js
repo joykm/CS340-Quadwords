@@ -3,7 +3,7 @@ Description: Enables the ability to click a row and update the items in that row
 */
 
 // Find all the rows on the page.
-var table_rows = document.getElementsByClassName('table-developer')
+var table_rows = document.getElementsByClassName('table-developers')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
 for (var row of table_rows) {
