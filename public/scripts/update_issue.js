@@ -3,19 +3,19 @@ Description: Enables the ability to click a row and update the items in that row
 */
 
 // Find all the rows on the page.
-var shelf_row = document.getElementsByClassName('table-issue')
+var table_rows = document.getElementsByClassName('table-issues')
 
 // Add event listeners to all the rows so when clicked, the update modal opens.
-for (var row of shelf_row) {
+for (var row of table_rows) {
     (function (row){
         row.addEventListener('click', function(){
             
             // Get the current values from the table on the screen.
             var name = row.querySelector('.table-name').innerHTML
             var description = row.querySelector('.table-description').innerHTML
-            var project = row.querySelector('.table-project').innerHTML
-            var status = row.querySelector('.table-status').innerHTML
-            var priority = row.querySelector('.table-priority').innerHTML
+            var project = row.querySelector('.table-project-id').innerHTML
+            var status = row.querySelector('.table-status-id').innerHTML
+            var priority = row.querySelector('.table-priority-id').innerHTML
             var dateRaised = row.querySelector('.table-date-raised').innerHTML
             var dateClosed = row.querySelector('.table-date-closed').innerHTML
             
