@@ -18,18 +18,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table-status">
-      <td scope="row">1</td>
-      <td class="table-status-type">Not Started</td>
-    </tr>
-    <tr class="table-status">
-      <td scope="row">2</td>
-      <td class="table-status-type">In Progress</td>
-    </tr>
-    <tr class="table-status">
-      <td scope="row">3</td>
-      <td class="table-status-type">Complete</td>
-    </tr>
+    {{!-- Handlebars building dynamic table from app.get request--}}
+    {{#each results}}
+      {{#if statusID}}
+        <tr class="table-statuses">
+          <td scope="row" class="table-id">{{statusID}}</td>
+          <td class="table-statusType">{{statusType}}</td>
+        </tr>
+      {{/if}}
+    {{/each}}
   </tbody>
 </table>
 

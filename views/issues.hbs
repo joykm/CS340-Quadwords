@@ -18,52 +18,31 @@
       <th scope="col">Issue Name</th>
       <th scope="col">Description</th>
       <th scope="col">Project ID</th>
-      <th scope="col">Priority ID</th>
       <th scope="col">Status ID</th>
+      <th scope="col">Priority ID</th>
       <th scope="col">Date Raised</th>
       <th scope="col">Date Closed</th>
     </tr>
   </thead>
   <tbody>
-    <tr class="table-issue">
-      <td scope="row">1</td>
-      <td class="table-name">issue-1</td>
-      <td class="table-description">example text</td>
-      <td class="table-project">ID#</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-date-raised">10/27/2020</td>
-      <td class="table-date-closed">10/30/2020</td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
-    <tr class="table-issue">
-      <td scope="row">2</td>
-      <td class="table-name">issue-2</td>
-      <td class="table-description">example text</td>
-      <td class="table-project">ID#</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-date-raised">10/19/2020</td>
-      <td class="table-date-closed">10/22/2020</td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
-    <tr class="table-issue">
-      <td scope="row">3</td>
-      <td class="table-name">issue-3</td>
-      <td class="table-description">example text</td>
-      <td class="table-project">ID#</td>
-      <td class="table-status">ID#</td>
-      <td class="table-priority">ID#</td>
-      <td class="table-date-raised">11/02/2020</td>
-      <td class="table-date-closed"></td>
-      <td class="assigned-users">
-        <span class="users-btn material-icons">people_alt</span>
-      </td>
-    </tr>
+        {{!-- Handlebars building dynamic table from app.get request--}}
+    {{#each results}}
+      {{#if issueID}}
+        <tr class="table-issues">
+          <td scope="row" class="table-id">{{issueID}}</td>
+          <td class="table-name">{{name}}</td>
+          <td class="table-description">{{description}}</td>
+          <td class="table-projectID">{{projectID}}</td>
+          <td class="table-statusID">{{statusID}}</td>
+          <td class="table-priorityID">{{priorityID}}</td>
+          <td class="table-dateRaised">{{dateRaised}}</td>
+          <td class="table-dateClosed">{{dateClosed}}</td>
+          <td class="assigned-users">
+            <span class="users-btn material-icons">people_alt</span>
+          </td>
+        </tr>
+      {{/if}}
+    {{/each}}
   </tbody>
 </table>
 

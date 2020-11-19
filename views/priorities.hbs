@@ -18,18 +18,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table-priority">
-      <td scope="row">1</td>
-      <td class="table-priority-type">Low</td>
-    </tr>
-    <tr class="table-priority">
-      <td scope="row">2</td>
-      <td class="table-priority-type">Medium</td>
-    </tr>
-    <tr class="table-priority">
-      <td scope="row">3</td>
-      <td class="table-priority-type">High</td>
-    </tr>
+    {{!-- Handlebars building dynamic table from app.get request--}}
+    {{#each results}}
+      {{#if priorityID}}
+        <tr class="table-priorities">
+          <td scope="row" class="table-id">{{priorityID}}</td>
+          <td class="table-statusType">{{priorityType}}</td>
+        </tr>
+      {{/if}}
+    {{/each}}
   </tbody>
 </table>
 

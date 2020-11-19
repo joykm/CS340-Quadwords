@@ -24,10 +24,10 @@
     </tr>
   </thead>
   <tbody>
-    {{!-- Handlebars building dynamic table in html --}}
+    {{!-- Handlebars building dynamic table from app.get request--}}
     {{#each results}}
-      {{#if name}}
-        <tr class="table-project">
+      {{#if projectID}}
+        <tr class="table-projects">
           <td scope="row" class="table-id">{{projectID}}</td>
           <td class="table-name">{{name}}</td>
           <td class="table-description">{{description}}</td>

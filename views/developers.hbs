@@ -22,10 +22,10 @@
     </tr>
   </thead>
   <tbody>
-  {{!-- Handlebars building dynamic table in html --}}
+  {{!-- Handlebars building dynamic table from app.get request--}}
     {{#each results}}
-      {{#if firstName}}
-        <tr class="table-developer">
+      {{#if developerID}}
+        <tr class="table-developers">
           <td scope="row" class="table-id">{{developerID}}</td>
           <td class="table-first-name">{{firstName}}</td>
           <td class="table-last-name">{{lastName}}</td>

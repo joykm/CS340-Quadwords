@@ -115,7 +115,8 @@ app.get('/', (req, res) => {
 app.get('/developers', (req, res) => {
 
     // DB Query String.
-    const developersQueryString = 'SELECT * FROM developers'
+    const developersQueryString = 
+    	`SELECT * FROM developers ORDER BY developerID ASC`
 
     // Requesting the data from the database
     connection.query(developersQueryString, function(error, results, fields){
@@ -140,7 +141,8 @@ app.post('/developers/new_developer', function(req, res) {
 
     // DB Query String. Designed with array below to prevent SQL injection.
     const developersInsertQueryString =
-        "INSERT INTO developers (firstName, lastName, title, email) VALUES (?, ?, ?, ?)"
+        `INSERT INTO developers (firstName, lastName, title, email) 
+        VALUES (?, ?, ?, ?)`
     
     const newDeveloperValues = [firstName, lastName, title, email]
 
@@ -167,7 +169,8 @@ app.post('/developers/update_developer', function(req, res) {
 
     // DB Query String. Designed with array below to prevent SQL injection.
     const developersUpdateQueryString =
-        "UPDATE developers SET firstName = ?, lastName = ?, title = ?, email = ? WHERE developerID = ?"
+        `UPDATE developers SET firstName = ?, lastName = ?, 
+        title = ?, email = ? WHERE developerID = ?`
     
     const newDeveloperValues = [firstName, lastName, title, email, developerID]
 
@@ -190,7 +193,7 @@ app.delete('/developers/delete_developer', function(req, res) {
 
         // DB Query String. Designed with array below to prevent SQL injection.
         const developersDeleteQueryString =
-            "DELETE FROM developers WHERE developerID = ?"
+            `DELETE FROM developers WHERE developerID = ?`
 
         const deleteDeveloperValue = [developerID]
 
@@ -215,9 +218,10 @@ app.delete('/developers/delete_developer', function(req, res) {
 app.get('/projects', (req, res) => {
     // DB Query String.
     const projectsQueryString = 
-    `SELECT projectID, name, description, statusID, priorityID, 
-    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
-    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects`
+	    `SELECT projectID, name, description, statusID, priorityID, 
+	    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
+	    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects 
+	    ORDER BY projectID ASC`
 
     // Requesting the data from the database
     connection.query(projectsQueryString, function(error, results, fields){
@@ -237,7 +241,22 @@ app.get('/projects', (req, res) => {
 
 // GET Issues Request
 app.get('/issues', (req, res) => {
-    res.render('issues')
+    const statusesQueryString = 
+    	`SELECT issueID, name, description, projectID, statusID, 
+    	priorityID, DATE_FORMAT(dateRaised,'%m-%d-%Y') as dateRaised, 
+    	DATE_FORMAT(dateClosed,'%m-%d-%Y') as dateClosed 
+    	FROM issues ORDER BY issueID ASC`
+
+    // Requesting the data from the database
+    connection.query(statusesQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, projects: 1})
+            res.render('issues', {results: results, issues: 1})
+        }
+    })
 });
 
 // ***
@@ -246,7 +265,20 @@ app.get('/issues', (req, res) => {
 
 // GET Statuses Request
 app.get('/statuses', (req, res) => {
-    res.render('statuses')
+
+    const statusesQueryString = 
+    	`SELECT * FROM statuses ORDER BY statusID ASC`
+
+    // Requesting the data from the database
+    connection.query(statusesQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, projects: 1})
+            res.render('statuses', {results: results, statuses: 1})
+        }
+    })
 });
 
 // ***
@@ -255,7 +287,19 @@ app.get('/statuses', (req, res) => {
 
 // GET Priorities Request
 app.get('/priorities', (req, res) => {
-    res.render('priorities')
+    const prioritiesQueryString = 
+    	`SELECT * FROM priorities ORDER BY priorityID ASC`
+
+    // Requesting the data from the database
+    connection.query(prioritiesQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, projects: 1})
+            res.render('priorities', {results: results, priorities: 1})
+        }
+    })
 });
 
 app.use(function(req,res){
