@@ -26,15 +26,27 @@
   </thead>
   <tbody>
         {{!-- Handlebars building dynamic table from app.get request--}}
-    {{#each results}}
+    {{#each issues}}
       {{#if issueID}}
         <tr class="table-issues">
           <td scope="row" class="table-id">{{issueID}}</td>
           <td class="table-name">{{name}}</td>
           <td class="table-description">{{description}}</td>
-          <td class="table-project-id">{{projectID}}</td>
-          <td class="table-status-id">{{statusID}}</td>
-          <td class="table-priority-id">{{priorityID}}</td>
+          {{#if projectID}}
+            <td class="table-project-id">{{projectID}} &nbsp : &nbsp {{projectName}}</td>
+          {{else}}
+            <td class="table-project-id">{{projectID}}</td>
+          {{/if}}
+          {{#if statusID}}
+            <td class="table-status-id">{{statusID}} &nbsp : &nbsp {{statusType}}</td>
+          {{else}}
+            <td class="table-status-id">{{statusID}}</td>
+          {{/if}}
+          {{#if priorityID}}
+            <td class="table-priority-id">{{priorityID}} &nbsp : &nbsp {{priorityType}}</td>
+          {{else}}
+            <td class="table-priority-id">{{priorityID}}</td>
+          {{/if}}
           <td class="table-date-raised">{{dateRaised}}</td>
           <td class="table-date-closed">{{dateClosed}}</td>
           <td class="assigned-users">
@@ -47,7 +59,7 @@
 </table>
 
 {{!-- Handlebars call to view_assigned_users_modal.hbs partial --}}
-{{> view_assigned_users_modal}}
+{{> issues_assigned_users_modal}}
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_issue_modal}}

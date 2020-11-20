@@ -241,20 +241,59 @@ app.get('/projects', (req, res) => {
 
 // GET Issues Request
 app.get('/issues', (req, res) => {
-    const statusesQueryString = 
-    	`SELECT issueID, name, description, projectID, statusID, 
-    	priorityID, DATE_FORMAT(dateRaised,'%m-%d-%Y') as dateRaised, 
-    	DATE_FORMAT(dateClosed,'%m-%d-%Y') as dateClosed 
-    	FROM issues ORDER BY issueID ASC`
+    // We are running multiple statements here. 
+    // Ensure "multipleStatements: true" is added to config.js
+    var issuesQueryString = 
+        // Query populates the table avoiding duplications
+        `SELECT issues.issueID, issues.name, issues.description, 
+        issues.projectID, projects.name AS projectName,
+        issues.statusID, statuses.statusType, 
+        issues.priorityID, priorities.priorityType,
+        DATE_FORMAT(issues.dateRaised,'%m-%d-%Y') as dateRaised, 
+        DATE_FORMAT(issues.dateClosed,'%m-%d-%Y') as dateClosed FROM issues 
+        LEFT JOIN projects ON issues.projectID = projects.projectID
+        LEFT JOIN statuses ON issues.statusID = statuses.statusID
+        LEFT JOIN priorities ON issues.priorityID = priorities.priorityID;`
+
+    issuesQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT projects.projectID, projects.name FROM projects
+        ORDER BY projects.projectID ASC;`
+
+    issuesQueryString += 
+        // Queries values from new table for selection even if not selected before 
+        `SELECT statuses.statusID, statuses.statusType FROM statuses
+        ORDER BY statuses.statusID ASC;`
+
+    issuesQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT priorities.priorityID, priorities.priorityType FROM priorities
+        ORDER BY priorities.priorityID ASC;`
+
+    issuesQueryString +=
+        // Queries values from cross join table
+        `SELECT issue_assignments.issueID, developers.firstName, 
+        developers.lastName from issues, issue_assignments, developers
+        WHERE issue_assignments.issueID = issues.issueID AND 
+        issue_assignments.developerID = developers.developerID 
+        ORDER BY issue_assignments.issueID ASC;`
+
 
     // Requesting the data from the database
-    connection.query(statusesQueryString, function(error, results, fields){
+    connection.query(issuesQueryString, function(error, results, fields){
         if (error) {
             console.log('Error loading developers: ' + error)
             res.send('Error loading developers: ' + error)
         } else {
-            // console.log({results: results, projects: 1})
-            res.render('issues', {results: results, issues: 1})
+            // console.log({issues: results[1]})
+            //access multiple statements as an array.
+            res.render('issues', {
+                        issues: results[0], 
+                        projects: results[1],
+                        statuses: results[2],
+                        priorities: results[3],
+                        issue_assignments: results[4] 
+                        })
         }
     })
 });

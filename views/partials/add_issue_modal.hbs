@@ -21,30 +21,36 @@
           </div>
         </form>
         <div class="form-group">
-            <label for="add-issue-project">Project (Note: Will be pulled from Project Table)</label>
-            <select class="form-control" id="add-issue-project" required>
-                <option>...</option>
-                <option>eQUIPT FE-1</option> 
-                <option>eQUIPT ERD/SCHEMA-2</option>
-                <option>eQUIPT FE-2</option>
+            <label for="add-issue-project">Project ID:</label>
+            <select class="form-control" id="add-issue-project">
+              <option></option>
+              {{#each projects}}
+                {{#if projectID}}
+                  <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                {{/if}}
+              {{/each}}
             </select>
         </div>
         <div class="form-group">
-            <label for="add-issue-status">Status (Note: Will be pulled from Status Table)</label>
-            <select class="form-control" id="add-issue-status" required>
-                <option>...</option>
-                <option>Not Started</option> 
-                <option>In Progress</option>
-                <option>Complete</option>
+            <label for="add-issue-status">Status ID:</label>
+            <select class="form-control" id="add-issue-status">
+              <option></option>
+              {{#each statuses}}
+                {{#if statusID}}
+                  <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                {{/if}}
+              {{/each}}
             </select>
         </div>
         <div class="form-group">
-            <label for="add-issue-priority">Priority (Note: Will be pulled from Priority Table)</label>
-            <select class="form-control" id="add-issue-priority" required>
-                <option>...</option> 
-                <option>Low</option> 
-                <option>Medium</option>
-                <option>High</option>
+            <label for="add-issue-priority">Priority ID:</label>
+            <select class="form-control" id="add-issue-priority">
+                <option></option>
+              {{#each priorities}}
+                {{#if priorityID}}
+                  <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                {{/if}}
+              {{/each}}
             </select>
         </div>
         <div class="form-group">
