@@ -227,7 +227,7 @@ app.get('/statuses', (req, res) => {
 app.get('/priorities', (req, res) => {
     
     // Query to clear db
-    const prioritiesQueryString = 'SELECT * FROM priorities'
+    const prioritiesQueryString = 'SELECT * FROM priorities ORDER BY priorityID ASC'
 
     // Requesting the data from the database
     connection.query(prioritiesQueryString, function(error, results){
