@@ -120,7 +120,6 @@ app.get('/developers', (req, res) => {
             console.log('Error loading developers: ' + error)
             res.send('Error loading developers: ' + error)
         } else {
-            // console.log({results: results, developers: 1})
             res.render('developers', {results: results, developers: 1})
         }
     })
@@ -147,7 +146,7 @@ app.post('/developers/new_developer', function(req, res) {
     const newDeveloperValues = [firstName, lastName, title, email]
 
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(developerInsertQueryString, newDeveloperValues, function(error, results, fields){
+    connection.query(developerInsertQueryString, newDeveloperValues, function(error){
         if (error) {
             console.log('Error adding developer to developers table: ' + error)
             res.send('Error adding developer to developers table: ' + error)
@@ -157,6 +156,36 @@ app.post('/developers/new_developer', function(req, res) {
         }
     });
 })
+
+app.put('/developers/update_developer', function(req, res) {
+
+    console.log("recieved put request")
+    console.log(req.body)
+
+    // Grab the necessary data from the POST request body
+    const developerId = req.body.developerId;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const title = req.body.title;
+    const email = req.body.email;
+
+    // DB Query Strings
+    const developerUpdateQueryString =
+        "UPDATE developers SET firstName=?, lastName=?, title=?, email=? WHERE developerID=?"
+
+    const updateDeveloperValues = [firstName, lastName, title, email, developerId]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(developerUpdateQueryString, updateDeveloperValues, function(error, results, fields){
+        if (error) {
+            console.log('Error updating developer in developers table: ' + error)
+            res.send('Error updating developer in developers table: ' + error)
+        } else {
+            console.log("No error")
+            res.redirect(303, '/developers');
+        }
+    });
+});
 
 app.delete('/developers/delete_developer', function(req, res) {
 
@@ -170,7 +199,7 @@ app.delete('/developers/delete_developer', function(req, res) {
         const deleteDeveloperValue = [devId]
 
         // Send the query, if it fails, log to console, if it succeeds, update the screen.
-        connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
+        connection.query(developerDeleteQueryString, deleteDeveloperValue, function(error){
         if (error) {
             console.log('Error deleting developer to developers table: ' + error);
             res.send('Error deleting developer to developers table: ' + error);

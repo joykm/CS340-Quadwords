@@ -72,3 +72,40 @@ deleteBtn.addEventListener("click", function() {
     request.send(JSON.stringify(payload));
     event.preventDefault();
 });
+
+// Event listener on update button within modal form
+// We can't send PUT requests from html
+var updateBtn = document.getElementById("update-btn")
+updateBtn.addEventListener("click", function() {
+
+    // Retrieve Developer Fields
+    var developerId = document.querySelector('#modal-dev-id').value
+    var firstName = document.querySelector('#modal-update-first-name').value
+    var lastName = document.querySelector('#modal-update-last-name').value
+    var title = document.querySelector('#modal-update-title').value
+    var email = document.querySelector('#modal-update-email').value
+
+    // Create Request and Payload
+    let request = new XMLHttpRequest();
+    let payload = {
+        developerId: developerId,
+        firstName: firstName,
+        lastName: lastName,
+        title: title,
+        email: email
+    }
+
+    //Process Put Request to Server
+    request.open('PUT', "/developers/update_developer", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.addEventListener("load", function() {
+        if (request.status >= 200 && request.status < 400) {
+            console.log("Record Updated");
+            location.reload();
+        } else {
+            console.log("There was an error updating this developer.");
+        }
+    });
+    request.send(JSON.stringify(payload));
+    event.preventDefault();
+});
