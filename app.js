@@ -128,6 +128,7 @@ app.get('/developers', (req, res) => {
 app.post('/developers/new_developer', function(req, res) {
 
     // Grab the necessary data from the POST request body
+    console.log(req.body)
     const firstName = req.body.modal_add_first_name;
     const lastName = req.body.modal_add_last_name;
     const title = req.body.modal_add_title;
@@ -158,9 +159,6 @@ app.post('/developers/new_developer', function(req, res) {
 })
 
 app.put('/developers/update_developer', function(req, res) {
-
-    console.log("recieved put request")
-    console.log(req.body)
 
     // Grab the necessary data from the POST request body
     const developerId = req.body.developerId;
@@ -225,8 +223,44 @@ app.get('/statuses', (req, res) => {
     res.render('statuses')
 });
 
+// == PRIORITIES ROUTING ==
 app.get('/priorities', (req, res) => {
-    res.render('priorities')
+    
+    // Query to clear db
+    const prioritiesQueryString = 'SELECT * FROM priorities'
+
+    // Requesting the data from the database
+    connection.query(prioritiesQueryString, function(error, results){
+        if (error) {
+            console.log('Error loading priorities: ' + error)
+            res.send('Error loading priorities: ' + error)
+        } else {
+            res.render('priorities', {results: results})
+        }
+    })
+});
+
+app.post('/priorities/add_priority', (req, res) => {
+        // Grab the necessary data from the POST request body
+        const priorityType = req.body.modal_add_priority_type;
+        console.log(`inserting ${priorityType}`)
+
+        // DB Query String
+        const priorityAddQueryString =
+            "INSERT INTO priorities (priorityType) VALUES (?)"
+        
+        const addPriorityValues = [priorityType]
+    
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(priorityAddQueryString, addPriorityValues, function(error){
+            if (error) {
+                console.log('Error adding priority to priorities table: ' + error)
+                res.send('Error adding priority to priorities table: ' + error)
+            } else {
+                console.log("No error")
+                res.redirect('/priorities')
+            }
+        });
 });
 
 app.use(function(req,res){

@@ -18,18 +18,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table-priority">
-      <td scope="row">1</td>
-      <td class="table-priority-type">Low</td>
-    </tr>
-    <tr class="table-priority">
-      <td scope="row">2</td>
-      <td class="table-priority-type">Medium</td>
-    </tr>
-    <tr class="table-priority">
-      <td scope="row">3</td>
-      <td class="table-priority-type">High</td>
-    </tr>
+      {{#each results}}
+      {{#if priorityID}}
+        <tr class="table-priority">
+          <td scope="row" class="table-id">{{priorityID}}</td>
+          <td class="table-first-name">{{priorityType}}</td>
+        </tr>
+      {{/if}}
+    {{/each}}
   </tbody>
 </table>
 
