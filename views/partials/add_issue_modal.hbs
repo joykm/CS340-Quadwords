@@ -4,67 +4,67 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleLabel">Add Project</h5>
+        <h5 class="modal-title" id="exampleLabel">Add Issue</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/issues/new_issue" method="POST">
           <div class="form-group">
-            <label for="add-issue-name" class="col-form-label">Issue Name:</label>
-            <input type="text" class="form-control" id="add-issue-name" placeholder="name" required>
+            <label for="modal_add_issue_name" class="col-form-label">Issue Name:</label>
+            <input type="text" class="form-control" id="modal_add_issue_name" name="modal_add_issue_name" placeholder="name" required>
           </div>
           <div class="form-group">
-            <label for="add-issue-description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="add-issue-description" placeholder="description" required></textarea>
+            <label for="modal_add_issue_description" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="modal_add_issue_description" name="modal_add_issue_description" placeholder="description" required></textarea>
           </div>
-        </form>
-        <div class="form-group">
-            <label for="add-issue-project">Project ID:</label>
-            <select class="form-control" id="add-issue-project">
-              <option></option>
-              {{#each projects}}
-                {{#if projectID}}
-                  <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
-                {{/if}}
-              {{/each}}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="add-issue-status">Status ID:</label>
-            <select class="form-control" id="add-issue-status">
-              <option></option>
-              {{#each statuses}}
-                {{#if statusID}}
-                  <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
-                {{/if}}
-              {{/each}}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="add-issue-priority">Priority ID:</label>
-            <select class="form-control" id="add-issue-priority">
+          <div class="form-group">
+              <label for="modal_add_issue_project">Project ID:</label>
+              <select class="form-control" id="modal_add_issue_project" name="modal_add_issue_project">
                 <option></option>
-              {{#each priorities}}
-                {{#if priorityID}}
-                  <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
-                {{/if}}
-              {{/each}}
-            </select>
+                {{#each projects}}
+                  {{#if projectID}}
+                    <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_issue_status">Status ID:</label>
+              <select class="form-control" id="modal_add_issue_status" name="modal_add_issue_status">
+                <option></option>
+                {{#each statuses}}
+                  {{#if statusID}}
+                    <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_issue_priority">Priority ID:</label>
+              <select class="form-control" id="modal_add_issue_priority" name="modal_add_issue_priority">
+                  <option></option>
+                {{#each priorities}}
+                  {{#if priorityID}}
+                    <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_issue_date_raised">Date Raised</label>
+              <input type="date" class="form-control" id="modal_add_issue_date_raised" name="modal_add_issue_date_raised" placeholder="mm/dd/yyyy" required>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_issue_date_closed">Date Closed</label>
+              <input type="date" class="form-control" id="modal_add_issue_date_closed" name="modal_add_issue_date_closed" placeholder="mm/dd/yyyy">
+          </div>
         </div>
-        <div class="form-group">
-            <label for="add-issue-date-raised">Date Raised</label>
-            <input type="date" class="form-control" id="add-issue-date-raised" placeholder="mm/dd/yyyy" required>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Issue</button>
         </div>
-        <div class="form-group">
-            <label for="add-issue-date-closed">Date Closed</label>
-            <input type="date" class="form-control" id="add-issue-date-closed" placeholder="mm/dd/yyyy">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Add Issue</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

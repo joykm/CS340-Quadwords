@@ -10,46 +10,50 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/projects/new_project" method="POST">
           <div class="form-group">
-            <label for="add-project-name" class="col-form-label">Project Name:</label>
-            <input type="text" class="form-control" id="add-project-name" placeholder="name" required>
+            <label for="modal_add_project_name" class="col-form-label">Project Name:</label>
+            <input type="text" class="form-control" id="modal_add_project_name" name="modal_add_project_name" placeholder="name" required>
           </div>
           <div class="form-group">
-            <label for="add-project-description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="add-project-description" placeholder="description" required></textarea>
+            <label for="modal_add_project_description" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="modal_add_project_description" name="modal_add_project_description" placeholder="description" required></textarea>
           </div>
-        </form>
-        <div class="form-group">
-            <label for="add-project-status">Status (Note: Will be pulled from Status Table)</label>
-            <select class="form-control" id="add-project-status" required>
-                <option>...</option>
-                <option>Not Started</option> 
-                <option>In Progress</option>
-                <option>Complete</option>
-            </select>
+          <div class="form-group">
+              <label for="modal_add_project_status">Status (Note: Will be pulled from Status Table)</label>
+              <select class="form-control" id="modal_add_project_status" name="modal_add_project_status" required>
+                <option></option>
+                {{#each statuses}}
+                  {{#if statusID}}
+                    <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_project_priority">Priority (Note: Will be pulled from Priority Table)</label>
+              <select class="form-control" id="modal_add_project_priority" name="modal_add_project_priority" required>
+                <option></option>
+                {{#each priorities}}
+                  {{#if priorityID}}
+                    <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_project_start_date">Start Date</label>
+              <input type="date" class="form-control" id="modal_add_project_start_date" name="modal_add_project_start_date" placeholder="mm/dd/yyyy" required>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_project_end_date">End Date</label>
+              <input type="date" class="form-control" id="modal_add_project_end_date" name="modal_add_project_end_date" placeholder="mm/dd/yyyy">
+          </div>
         </div>
-        <div class="form-group">
-            <label for="add-project-priority">Priority (Note: Will be pulled from Priority Table)</label>
-            <select class="form-control" id="add-project-priority" required>
-                <option>...</option> 
-                <option>Low</option> 
-                <option>Medium</option>
-                <option>High</option>
-            </select>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Project</button>
         </div>
-        <div class="form-group">
-            <label for="add-project-start-date">Start Date</label>
-            <input type="date" class="form-control" id="add-project-start-date" placeholder="mm/dd/yyyy" required>
-        </div>
-        <div class="form-group">
-            <label for="add-project-end-date">End Date</label>
-            <input type="date" class="form-control" id="add-project-end-date" placeholder="mm/dd/yyyy">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Add Project</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
