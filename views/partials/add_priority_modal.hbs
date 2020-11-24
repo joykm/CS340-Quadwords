@@ -10,13 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/priorities/add_priority" method="post">
           <div class="form-group">
-            <label for="add-priority-type" class="col-form-label">Priority Type:</label>
-            <input type="text" class="form-control" id="add-priority-type" placeholder="priority" required>
+            <label for="modal_add_priority_type" class="col-form-label">Priority Type:</label>
+            <input type="text" class="form-control" id="modal_add_priority_type" name="modal_add_priority_type" placeholder="priority" required>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Add Priority</button>
+            <button type="submit" class="btn btn-primary">Add Priority</button>
           </div>
         </form>
       </div>
