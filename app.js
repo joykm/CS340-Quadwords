@@ -155,7 +155,7 @@ app.post('/developers/new_developer', function(req, res) {
             res.redirect('/developers')
         }
     });
-})
+});
 
 // UPDATE Developer Request
 app.post('/developers/update_developer', function(req, res) {
@@ -217,11 +217,30 @@ app.delete('/developers/delete_developer', function(req, res) {
 // GET Project Request
 app.get('/projects', (req, res) => {
     // DB Query String.
-    const projectsQueryString = 
+    var projectsQueryString = 
 	    `SELECT projectID, name, description, statusID, priorityID, 
 	    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
 	    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects 
-	    ORDER BY projectID ASC`
+        ORDER BY projectID ASC;`
+
+    projectsQueryString += 
+        // Queries values from new table for selection even if not selected before 
+        `SELECT statuses.statusID, statuses.statusType FROM statuses
+        ORDER BY statuses.statusID ASC;`
+
+    projectsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT priorities.priorityID, priorities.priorityType FROM priorities
+        ORDER BY priorities.priorityID ASC;`
+
+    projectsQueryString +=
+        // Queries values from cross join table
+        `SELECT project_assignments.projectID, developers.firstName, 
+        developers.lastName from projects, project_assignments, developers
+        WHERE project_assignments.projectID = projects.projectID AND 
+        project_assignments.developerID = developers.developerID 
+        ORDER BY project_assignments.projectID ASC;`
+
 
     // Requesting the data from the database
     connection.query(projectsQueryString, function(error, results, fields){
@@ -230,9 +249,43 @@ app.get('/projects', (req, res) => {
             res.send('Error loading developers: ' + error)
         } else {
             // console.log({results: results, projects: 1})
-            res.render('projects', {results: results, projects: 1})
+            res.render('projects', {
+                projects: results[0],
+                statuses: results[1],
+                priorities: results[2],
+                issue_assignments: results[3] 
+                })
         }
     })
+});
+
+// INSERT Project Request
+app.post('/projects/new_project', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const name = req.body.modal_add_project_name;
+    const description = req.body.modal_add_project_description;
+    const priority = req.body.modal_add_project_priority;
+    const status = req.body.modal_add_project_status;
+    const startDate = req.body.modal_add_project_start_date;
+    const endDate = req.body.modal_add_project_end_date;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const projectsInsertQueryString =
+        `INSERT INTO projects (name, description, priorityID, statusID, startDate, endDate)
+        VALUES (?, ?, ?, ?, ?, ?)`
+    
+    const newProjectValues = [name, description, priority, status, startDate, endDate]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(projectsInsertQueryString, newProjectValues, function(error){
+        if (error) {
+            console.log('Error adding issue to issues table: ' + error)
+            res.send('Error adding issue to issues table: ' + error)
+        } else {
+            res.redirect('/projects')
+        }
+    });
 });
 
 // ***
@@ -297,6 +350,38 @@ app.get('/issues', (req, res) => {
         }
     })
 });
+
+// INSERT Issue Request
+app.post('/issues/new_issue', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const name = req.body.modal_add_issue_name;
+    const description = req.body.modal_add_issue_description;
+    const project = req.body.modal_add_issue_project;
+    const priority = req.body.modal_add_issue_priority;
+    const status = req.body.modal_add_issue_status;
+    const dateRaised = req.body.modal_add_issue_date_raised;
+    const dateClosed = req.body.modal_add_issue_date_closed;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const issuesInsertQueryString =
+        `INSERT INTO issues (name, description, projectID, priorityID, statusID, dateRaised, dateClosed)
+        VALUES (?, ?, ?, ?, ?, ?, ?)`
+    
+    const newIssueValues = [name, description, project, priority, status, dateRaised, dateClosed]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(issuesInsertQueryString, newIssueValues, function(error){
+        if (error) {
+            console.log('Error adding issue to issues table: ' + error)
+            res.send('Error adding issue to issues table: ' + error)
+        } else {
+            res.redirect('/issues')
+        }
+    });
+});
+
+
 
 // ***
 // Statuses Routes
