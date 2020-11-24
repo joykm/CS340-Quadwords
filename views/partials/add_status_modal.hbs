@@ -10,13 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/statuses/add_status" method="post">
           <div class="form-group">
-            <label for="add-status-type" class="col-form-label">Status Type:</label>
-            <input type="text" class="form-control" id="add-status-name" placeholder="status" required>
+            <label for="modal_add_status_type" class="col-form-label">Status Type:</label>
+            <input type="text" class="form-control" id="modal_add_status_type" name="modal_add_status_type" placeholder="status" required>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Add Status</button>
+            <button type="submit" class="btn btn-primary">Add Status</button>
           </div>
         </form>
       </div>
