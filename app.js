@@ -320,6 +320,30 @@ app.get('/statuses', (req, res) => {
     })
 });
 
+app.post('/statuses/add_status', (req, res) => {
+    // Grab the necessary data from the POST request body
+    console.log(req.body)
+    const statusType = req.body.modal_add_status_type;
+
+
+    // DB Query String
+    const statusAddQueryString =
+        "INSERT INTO statuses (statusType) VALUES (?)"
+    
+    const addStatusValues = [statusType]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(statusAddQueryString, addStatusValues, function(error){
+        if (error) {
+            console.log('Error adding status to statuses table: ' + error)
+            res.send('Error adding status to statuses table: ' + error)
+        } else {
+            console.log("No error")
+            res.redirect('/statuses')
+        }
+    });
+});
+
 // ***
 // Priorities Routes
 // ***
