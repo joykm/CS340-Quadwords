@@ -107,186 +107,7 @@ app.get('/', (req, res) => {
     })
 });
 
-// ***
-// Developer Routes
-// ***
 
-// GET Developer Request
-app.get('/developers', (req, res) => {
-
-    // DB Query String.
-    const developersQueryString = 
-    	`SELECT * FROM developers ORDER BY developerID ASC`
-
-    // Requesting the data from the database
-    connection.query(developersQueryString, function(error, results, fields){
-        if (error) {
-            console.log('Error loading developers: ' + error)
-            res.send('Error loading developers: ' + error)
-        } else {
-            // console.log({results: results, developers: 1})
-            res.render('developers', {results: results, developers: 1})
-        }
-    })
-});
-
-// INSERT Developer Request
-app.post('/developers/new_developer', function(req, res) {
-
-    // Grab the necessary data from the POST request body.
-    const firstName = req.body.modal_add_first_name;
-    const lastName = req.body.modal_add_last_name;
-    const title = req.body.modal_add_title;
-    const email = req.body.modal_add_email;
-
-    // DB Query String. Designed with array below to prevent SQL injection.
-    const developersInsertQueryString =
-        `INSERT INTO developers (firstName, lastName, title, email) 
-        VALUES (?, ?, ?, ?)`
-    
-    const newDeveloperValues = [firstName, lastName, title, email]
-
-    // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(developersInsertQueryString, newDeveloperValues, function(error, results, fields){
-        if (error) {
-            console.log('Error adding developer to developers table: ' + error)
-            res.send('Error adding developer to developers table: ' + error)
-        } else {
-            res.redirect('/developers')
-        }
-    });
-});
-
-// UPDATE Developer Request
-app.post('/developers/update_developer', function(req, res) {
-
-    // Grab the necessary data from the POST request body.
-    const developerID = req.body.modal_update_developerID;
-    const firstName = req.body.modal_update_first_name;
-    const lastName = req.body.modal_update_last_name;
-    const title = req.body.modal_update_title;
-    const email = req.body.modal_update_email;
-
-    // DB Query String. Designed with array below to prevent SQL injection.
-    const developersUpdateQueryString =
-        `UPDATE developers SET firstName = ?, lastName = ?, 
-        title = ?, email = ? WHERE developerID = ?`
-    
-    const newDeveloperValues = [firstName, lastName, title, email, developerID]
-
-    // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(developersUpdateQueryString, newDeveloperValues, function(error, results, fields){
-        if (error) {
-            console.log('Error adding developer to developers table: ' + error)
-            res.send('Error adding developer to developers table: ' + error)
-        } else {
-            res.redirect('/developers')
-        }
-    });
-})
-
-// DELETE Developer Request
-app.delete('/developers/delete_developer', function(req, res) {
-
-        // Grab the necessary data from the POST request body
-        const developerID = req.body.developerID;
-
-        // DB Query String. Designed with array below to prevent SQL injection.
-        const developersDeleteQueryString =
-            `DELETE FROM developers WHERE developerID = ?`
-
-        const deleteDeveloperValue = [developerID]
-
-        // Send the query, if it fails, log to console, if it succeeds, update the screen.
-        connection.query(developersDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
-        if (error) {
-            console.log('Error deleting developer to developers table: ' + error);
-            res.send('Error deleting developer to developers table: ' + error);
-        } else {
-            res.redirect(303, '/developers');
-        }
-    });
-
-
-})
-
-// ***
-// Project Routes
-// ***
-
-// GET Project Request
-app.get('/projects', (req, res) => {
-    // DB Query String.
-    var projectsQueryString = 
-	    `SELECT projectID, name, description, statusID, priorityID, 
-	    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
-	    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects 
-        ORDER BY projectID ASC;`
-
-    projectsQueryString += 
-        // Queries values from new table for selection even if not selected before 
-        `SELECT statuses.statusID, statuses.statusType FROM statuses
-        ORDER BY statuses.statusID ASC;`
-
-    projectsQueryString += 
-        // Queries values from new table for selection even if not selected before
-        `SELECT priorities.priorityID, priorities.priorityType FROM priorities
-        ORDER BY priorities.priorityID ASC;`
-
-    projectsQueryString +=
-        // Queries values from cross join table
-        `SELECT project_assignments.projectID, developers.firstName, 
-        developers.lastName from projects, project_assignments, developers
-        WHERE project_assignments.projectID = projects.projectID AND 
-        project_assignments.developerID = developers.developerID 
-        ORDER BY project_assignments.projectID ASC;`
-
-
-    // Requesting the data from the database
-    connection.query(projectsQueryString, function(error, results, fields){
-        if (error) {
-            console.log('Error loading developers: ' + error)
-            res.send('Error loading developers: ' + error)
-        } else {
-            // console.log({results: results, projects: 1})
-            res.render('projects', {
-                projects: results[0],
-                statuses: results[1],
-                priorities: results[2],
-                issue_assignments: results[3] 
-                })
-        }
-    })
-});
-
-// INSERT Project Request
-app.post('/projects/new_project', function(req, res) {
-
-    // Grab the necessary data from the POST request body.
-    const name = req.body.modal_add_project_name;
-    const description = req.body.modal_add_project_description;
-    const priority = req.body.modal_add_project_priority;
-    const status = req.body.modal_add_project_status;
-    const startDate = req.body.modal_add_project_start_date;
-    const endDate = req.body.modal_add_project_end_date;
-
-    // DB Query String. Designed with array below to prevent SQL injection.
-    const projectsInsertQueryString =
-        `INSERT INTO projects (name, description, priorityID, statusID, startDate, endDate)
-        VALUES (?, ?, ?, ?, ?, ?)`
-    
-    const newProjectValues = [name, description, priority, status, startDate, endDate]
-
-    // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(projectsInsertQueryString, newProjectValues, function(error){
-        if (error) {
-            console.log('Error adding issue to issues table: ' + error)
-            res.send('Error adding issue to issues table: ' + error)
-        } else {
-            res.redirect('/projects')
-        }
-    });
-});
 
 // ***
 // Issues Routes
@@ -381,6 +202,235 @@ app.post('/issues/new_issue', function(req, res) {
     });
 });
 
+// DELETE Issue Request
+app.delete('/issues/delete_issue', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const issueID = req.body.issueID;
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const issuesDeleteQueryString =
+            `DELETE FROM issues WHERE issueID = ?`
+
+        const deleteIssueValue = [issueID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(issuesDeleteQueryString, deleteIssueValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting issue from issues table: ' + error);
+            res.send('Error deleting issue from issues table: ' + error);
+        } else {
+            res.redirect(303, '/issues');
+        }
+    });
+})
+
+
+
+// ***
+// Project Routes
+// ***
+
+// GET Project Request
+app.get('/projects', (req, res) => {
+    // DB Query String.
+    var projectsQueryString = 
+	    `SELECT projectID, name, description, statusID, priorityID, 
+	    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
+	    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects 
+        ORDER BY projectID ASC;`
+
+    projectsQueryString += 
+        // Queries values from new table for selection even if not selected before 
+        `SELECT statuses.statusID, statuses.statusType FROM statuses
+        ORDER BY statuses.statusID ASC;`
+
+    projectsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT priorities.priorityID, priorities.priorityType FROM priorities
+        ORDER BY priorities.priorityID ASC;`
+
+    projectsQueryString +=
+        // Queries values from cross join table
+        `SELECT project_assignments.projectID, developers.firstName, 
+        developers.lastName from projects, project_assignments, developers
+        WHERE project_assignments.projectID = projects.projectID AND 
+        project_assignments.developerID = developers.developerID 
+        ORDER BY project_assignments.projectID ASC;`
+
+
+    // Requesting the data from the database
+    connection.query(projectsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, projects: 1})
+            res.render('projects', {
+                projects: results[0],
+                statuses: results[1],
+                priorities: results[2],
+                issue_assignments: results[3] 
+                })
+        }
+    })
+});
+
+// INSERT Project Request
+app.post('/projects/new_project', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const name = req.body.modal_add_project_name;
+    const description = req.body.modal_add_project_description;
+    const priority = req.body.modal_add_project_priority;
+    const status = req.body.modal_add_project_status;
+    const startDate = req.body.modal_add_project_start_date;
+    const endDate = req.body.modal_add_project_end_date;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const projectsInsertQueryString =
+        `INSERT INTO projects (name, description, priorityID, statusID, startDate, endDate)
+        VALUES (?, ?, ?, ?, ?, ?)`
+    
+    const newProjectValues = [name, description, priority, status, startDate, endDate]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(projectsInsertQueryString, newProjectValues, function(error){
+        if (error) {
+            console.log('Error adding issue to issues table: ' + error)
+            res.send('Error adding issue to issues table: ' + error)
+        } else {
+            res.redirect('/projects')
+        }
+    });
+});
+
+// DELETE Project Request
+app.delete('/projects/delete_project', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const projectID = req.body.projectID;
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const projectsDeleteQueryString =
+            `DELETE FROM projects WHERE projectID = ?`
+
+        const deleteProjectValue = [projectID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(projectsDeleteQueryString, deleteProjectValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting project from projects table: ' + error);
+            res.send('Error deleting project from projects table: ' + error);
+        } else {
+            res.redirect(303, '/projects');
+        }
+    });
+})
+
+
+
+// ***
+// Developer Routes
+// ***
+
+// GET Developer Request
+app.get('/developers', (req, res) => {
+
+    // DB Query String.
+    const developersQueryString = 
+        `SELECT * FROM developers ORDER BY developerID ASC`
+
+    // Requesting the data from the database
+    connection.query(developersQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading developers: ' + error)
+            res.send('Error loading developers: ' + error)
+        } else {
+            // console.log({results: results, developers: 1})
+            res.render('developers', {results: results, developers: 1})
+        }
+    })
+});
+
+// INSERT Developer Request
+app.post('/developers/new_developer', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const firstName = req.body.modal_add_first_name;
+    const lastName = req.body.modal_add_last_name;
+    const title = req.body.modal_add_title;
+    const email = req.body.modal_add_email;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const developersInsertQueryString =
+        `INSERT INTO developers (firstName, lastName, title, email) 
+        VALUES (?, ?, ?, ?)`
+    
+    const newDeveloperValues = [firstName, lastName, title, email]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(developersInsertQueryString, newDeveloperValues, function(error, results, fields){
+        if (error) {
+            console.log('Error adding developer to developers table: ' + error)
+            res.send('Error adding developer to developers table: ' + error)
+        } else {
+            res.redirect('/developers')
+        }
+    });
+});
+
+// UPDATE Developer Request
+app.post('/developers/update_developer', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const developerID = req.body.modal_update_developerID;
+    const firstName = req.body.modal_update_first_name;
+    const lastName = req.body.modal_update_last_name;
+    const title = req.body.modal_update_title;
+    const email = req.body.modal_update_email;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const developersUpdateQueryString =
+        `UPDATE developers SET firstName = ?, lastName = ?, 
+        title = ?, email = ? WHERE developerID = ?`
+    
+    const newDeveloperValues = [firstName, lastName, title, email, developerID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(developersUpdateQueryString, newDeveloperValues, function(error, results, fields){
+        if (error) {
+            console.log('Error adding developer to developers table: ' + error)
+            res.send('Error adding developer to developers table: ' + error)
+        } else {
+            res.redirect('/developers')
+        }
+    });
+})
+
+// DELETE Developer Request
+app.delete('/developers/delete_developer', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const developerID = req.body.developerID;
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const developersDeleteQueryString =
+            `DELETE FROM developers WHERE developerID = ?`
+
+        const deleteDeveloperValue = [developerID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(developersDeleteQueryString, deleteDeveloperValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting developer from developers table: ' + error);
+            res.send('Error deleting developer from developers table: ' + error);
+        } else {
+            res.redirect(303, '/developers');
+        }
+    });
+})
+
 
 
 // ***
@@ -405,6 +455,7 @@ app.get('/statuses', (req, res) => {
     })
 });
 
+// INSERT Status Request
 app.post('/statuses/add_status', (req, res) => {
     // Grab the necessary data from the POST request body
     console.log(req.body)
@@ -429,6 +480,29 @@ app.post('/statuses/add_status', (req, res) => {
     });
 });
 
+// DELETE Status Request
+app.delete('/statuses/delete_status', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const statusID = req.body.statusID;
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const statusesDeleteQueryString =
+            `DELETE FROM statuses WHERE statusID = ?`
+
+        const deleteStatusValue = [statusID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(statusesDeleteQueryString, deleteStatusValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting status from statuses table: ' + error);
+            res.send('Error deleting status from statuses table: ' + error);
+        } else {
+            res.redirect(303, '/statuses');
+        }
+    });
+})
+
 // ***
 // Priorities Routes
 // ***
@@ -441,8 +515,8 @@ app.get('/priorities', (req, res) => {
     // Requesting the data from the database
     connection.query(prioritiesQueryString, function(error, results){
         if (error) {
-            console.log('Error loading developers: ' + error)
-            res.send('Error loading developers: ' + error)
+            console.log('Error loading priorities table: ' + error)
+            res.send('Error loading priorities table: ' + error)
         } else {
             // console.log({results: results, projects: 1})
             res.render('priorities', {results: results, priorities: 1})
@@ -450,6 +524,7 @@ app.get('/priorities', (req, res) => {
     })
 });
 
+// INSERT Priority Request
 app.post('/priorities/add_priority', (req, res) => {
     // Grab the necessary data from the POST request body
     const priorityType = req.body.modal_add_priority_type;
@@ -472,6 +547,29 @@ app.post('/priorities/add_priority', (req, res) => {
         }
     });
 });
+
+// DELETE Priority Request
+app.delete('/priorities/delete_priority', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const priorityID = req.body.priorityID;
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const prioritiesDeleteQueryString =
+            `DELETE FROM priorities WHERE priorityID = ?`
+
+        const deletePriorityValue = [priorityID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(prioritiesDeleteQueryString, deletePriorityValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting priority from priority table: ' + error);
+            res.send('Error deleting priority from priority table: ' + error);
+        } else {
+            res.redirect(303, '/priorities');
+        }
+    });
+})
 
 app.use(function(req,res){
   res.status(404);

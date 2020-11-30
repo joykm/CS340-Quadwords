@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/projects/new_project" method="POST">
+        <form action="/projects/new_project" id="add_project_form" method="POST">
           <div class="form-group">
             <label for="modal_add_project_name" class="col-form-label">Project Name:</label>
             <input type="text" class="form-control" id="modal_add_project_name" name="modal_add_project_name" placeholder="name" required>
@@ -20,8 +20,8 @@
             <textarea class="form-control" id="modal_add_project_description" name="modal_add_project_description" placeholder="description" required></textarea>
           </div>
           <div class="form-group">
-              <label for="modal_add_project_status">Status (Note: Will be pulled from Status Table)</label>
-              <select class="form-control" id="modal_add_project_status" name="modal_add_project_status" required>
+              <label for="modal_add_project_status">Status:</label>
+              <select class="form-control" id="modal_add_project_status" name="modal_add_project_status">
                 <option></option>
                 {{#each statuses}}
                   {{#if statusID}}
@@ -31,8 +31,8 @@
               </select>
           </div>
           <div class="form-group">
-              <label for="modal_add_project_priority">Priority (Note: Will be pulled from Priority Table)</label>
-              <select class="form-control" id="modal_add_project_priority" name="modal_add_project_priority" required>
+              <label for="modal_add_project_priority">Priority:</label>
+              <select class="form-control" id="modal_add_project_priority" name="modal_add_project_priority">
                 <option></option>
                 {{#each priorities}}
                   {{#if priorityID}}
@@ -57,3 +57,4 @@
     </div>
   </div>
 </div>
+<script src="/scripts/add_project.js"></script>

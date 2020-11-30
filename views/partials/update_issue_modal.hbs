@@ -9,17 +9,18 @@
       </div>
       <div class="modal-body">
         <form class="update-form">
+          <input type="hidden" id="modal_update_issueID" name="modal_update_issueID" readonly>
           <div class="form-group">
-            <label for="modal-update-issue-name" class="col-form-label">Issue Name:</label>
-            <input type="text" class="form-control" id="modal-update-issue-name" placeholder="name" required>
+            <label for="modal_update_issue_name" class="col-form-label">Issue Name:</label>
+            <input type="text" class="form-control" id="modal_update_issue_name" placeholder="name" required>
           </div>
           <div class="form-group">
-            <label for="modal-update-issue-description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="modal-update-issue-description" placeholder="description" required></textarea>
+            <label for="modal_update_issue_description" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="modal_update_issue_description" placeholder="description" required></textarea>
           </div>
           <div class="form-group">
-              <label for="modal-update-issue-project">Project ID:</label>
-              <select class="form-control" id="modal-update-issue-project">
+              <label for="modal_update_issue_project">Project ID:</label>
+              <select class="form-control" id="modal_update_issue_project">
                 <option></option>
                 {{#each projects}}
                   {{#if projectID}}
@@ -29,8 +30,8 @@
               </select>
           </div>
           <div class="form-group">
-              <label for="modal-update-issue-status">Status ID:</label>
-              <select class="form-control" id="modal-update-issue-status">
+              <label for="modal_update_issue_status">Status ID:</label>
+              <select class="form-control" id="modal_update_issue_status">
                 <option></option>
                 {{#each statuses}}
                   {{#if statusID}}
@@ -40,8 +41,8 @@
               </select>
           </div>
           <div class="form-group">
-              <label for="modal-update-issue-priority">Priority ID:</label>
-              <select class="form-control" id="modal-update-issue-priority">
+              <label for="modal_update_issue_priority">Priority ID:</label>
+              <select class="form-control" id="modal_update_issue_priority">
                 <option></option>
                 {{#each priorities}}
                   {{#if priorityID}}
@@ -51,12 +52,12 @@
               </select>
           </div>
           <div class="form-group">
-              <label for="modal-update-issue-date-raised">Date Raised</label>
-              <input type="date" class="form-control" id="modal-update-issue-date-raised" placeholder="mm/dd/yyyy" required>
+              <label for="modal_update_issue_date_raised">Date Raised</label>
+              <input type="date" class="form-control" id="modal_update_issue_date_raised" placeholder="mm/dd/yyyy" required>
           </div>
           <div class="form-group">
-              <label for="modal-update-issue-date-closed">Date Closed</label>
-              <input type="date" class="form-control" id="modal-update-issue-date-closed" placeholder="mm/dd/yyyy">
+              <label for="modal_update_issue_date_closed">Date Closed</label>
+              <input type="date" class="form-control" id="modal_update_issue_date_closed" placeholder="mm/dd/yyyy">
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>

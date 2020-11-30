@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/issues/new_issue" method="POST">
+        <form action="/issues/new_issue" id="add_issue_form" method="POST">
           <div class="form-group">
             <label for="modal_add_issue_name" class="col-form-label">Issue Name:</label>
             <input type="text" class="form-control" id="modal_add_issue_name" name="modal_add_issue_name" placeholder="name" required>
@@ -60,11 +60,14 @@
               <label for="modal_add_issue_date_closed">Date Closed</label>
               <input type="date" class="form-control" id="modal_add_issue_date_closed" name="modal_add_issue_date_closed" placeholder="mm/dd/yyyy">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Add Issue</button>
-        </div>
-      </form>
+        
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Add Issue</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+<script src="/scripts/add_issue.js"></script>
+
