@@ -18,14 +18,14 @@ for (var row of table_rows) {
             var email = row.querySelector('.table-email').innerHTML
             
             // Get access to the input feilds in the form.
-            var modalDevID = document.querySelector('#modal_update_developerID')
+            var modalDeveloperID = document.querySelector('#modal_update_developerID')
             var modalInputFirstName = document.querySelector('#modal_update_first_name')
             var modalInputLastName = document.querySelector('#modal_update_last_name')
             var modalInputTitle = document.querySelector('#modal_update_title')
             var modalInputEmail = document.querySelector('#modal_update_email')
 
             // Populate the input fields with the previous data.
-            modalDevID.value = developerID
+            modalDeveloperID.value = developerID
             modalInputFirstName.value = firstName
             modalInputLastName.value = lastName
             modalInputTitle.value = title

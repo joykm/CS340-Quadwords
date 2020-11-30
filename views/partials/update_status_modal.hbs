@@ -9,10 +9,11 @@
       </div>
       <div class="modal-body">
          <form class="update-form">
-          {{!-- <div class="form-group"> --}}
-            <label for="modal-update-status-type" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="modal-update-status-type" name="modal-update-status" placeholder="status" required>
-          {{!-- </div> --}}
+          <input type="hidden" id="modal_update_statusID" name="modal_update_statusID" readonly>
+          <div class="form-group">
+            <label for="modal_update_status_type" class="col-form-label">First Name:</label>
+            <input type="text" class="form-control" id="modal_update_status_type" name="modal_update_status_type" placeholder="status" required>
+          </div>
         
           <div class="modal-footer d-flex justify-content-between">
             <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>

@@ -11,6 +11,7 @@ for (var row of table_rows) {
         row.addEventListener('click', function(){
             
             // Get the current values from the table on the screen.
+            var projectID = row.querySelector('.table-id').innerHTML
             var name = row.querySelector('.table-name').innerHTML
             var description = row.querySelector('.table-description').innerHTML
             var status = row.querySelector('.table-status-id').innerHTML
@@ -19,14 +20,16 @@ for (var row of table_rows) {
             var endDate = row.querySelector('.table-end-date').innerHTML
             
             // Get access to the input feilds in the form.
-            var modalInputName = document.querySelector('#modal-update-project-name')
-            var modalInputDescription = document.querySelector('#modal-update-project-description')
-            var modalInputStatus = document.querySelector('#modal-update-project-status')
-            var modalInputPriority = document.querySelector('#modal-update-project-priority')
-            var modalInputStartDate = document.querySelector('#modal-update-project-start-date')
-            var modalInputEndDate = document.querySelector('#modal-update-project-end-date')
+            var modalProjectID = document.querySelector('#modal_update_projectID')
+            var modalInputName = document.querySelector('#modal_update_project_name')
+            var modalInputDescription = document.querySelector('#modal_update_project_description')
+            var modalInputStatus = document.querySelector('#modal_update_project_status')
+            var modalInputPriority = document.querySelector('#modal_update_project_priority')
+            var modalInputStartDate = document.querySelector('#modal_update_project_start_date')
+            var modalInputEndDate = document.querySelector('#modal_update_project_end_date')
 
             // Populate the input fields with the previous data.
+            modalProjectID.value = projectID
             modalInputName.value = name
             modalInputDescription.value = description
             modalInputStatus.value = status
@@ -54,7 +57,26 @@ form.addEventListener('submit', function(event) {
 // Event listener on delete button within modal form
 var deleteBtn = document.getElementById("delete-btn")
 deleteBtn.addEventListener("click", function() {
-    // Add a delete confirmation here, as well as delete confirmation funcitonality
-    alert("Are you sure you want to delete this row?")
+    // Retrieve Current ID
+    var projectID = document.querySelector('#modal_update_projectID').value
+    console.log(projectID)
 
-})
+    // Create Request and Payload
+    let request = new XMLHttpRequest();
+    let payload = {projectID: projectID}
+    console.log(payload)
+
+    //Process Delete Request to Server
+    request.open("delete", "/projects/delete_project", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.addEventListener("load", function() {
+        if (request.status >= 200 && request.status < 400) {
+            console.log("Record Deleted");
+            location.reload();
+        } else {
+            console.log("There was an error deleting this project.");
+        }
+    });
+    request.send(JSON.stringify(payload));
+    event.preventDefault();
+});
