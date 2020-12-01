@@ -202,6 +202,38 @@ app.post('/issues/new_issue', function(req, res) {
     });
 });
 
+// UPDATE Issue Request
+app.post('/issues/update_issue', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const issueID = req.body.modal_update_issueID;
+    const name = req.body.modal_update_issue_name;
+    const description = req.body.modal_update_issue_description;
+    const projectID = req.body.modal_update_issue_project;
+    const statusID = req.body.modal_update_issue_status;
+    const priorityID = req.body.modal_update_issue_priority;
+    const dateRaised = req.body.modal_update_issue_date_raised;
+    const dateClosed = req.body.modal_update_issue_date_closed;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const issuesUpdateQueryString =
+        `UPDATE issues SET name = ?, description = ?, projectID = ?,
+        statusID = ?, priorityID = ?, dateRaised = ?, dateClosed = ? WHERE issueID = ?`
+    
+    const newIssueValues = 
+    [name, description, projectID, statusID, priorityID, dateRaised, dateClosed, issueID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(issuesUpdateQueryString, newIssueValues, function(error, results, fields){
+        if (error) {
+            console.log('Error updating issue on issues table: ' + error)
+            res.send('Error updating issue on issues table: ' + error)
+        } else {
+            res.redirect('/issues')
+        }
+    });
+})
+
 // DELETE Issue Request
 app.delete('/issues/delete_issue', function(req, res) {
 
@@ -320,14 +352,6 @@ app.post('/projects/update_project', function(req, res) {
     const priorityID = req.body.modal_update_project_priority;
     const startDate = req.body.modal_update_project_start_date;
     const endDate = req.body.modal_update_project_end_date;
-
-    console.log(projectID)
-    console.log(name)
-    console.log(description)
-    console.log(statusID)
-    console.log(priorityID)
-    console.log(startDate)
-    console.log(endDate)
 
     // DB Query String. Designed with array below to prevent SQL injection.
     const projectsUpdateQueryString =
@@ -523,6 +547,31 @@ app.post('/statuses/add_status', (req, res) => {
     });
 });
 
+// UPDATE Status Request
+app.post('/statuses/update_status', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const statusID = req.body.modal_update_statusID;
+    const statusType = req.body.modal_update_status_type;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const statusesUpdateQueryString =
+        `UPDATE statuses SET statusType = ? WHERE statusID = ?`
+    
+    const newStatusValues = 
+    [statusType, statusID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(statusesUpdateQueryString, newStatusValues, function(error, results, fields){
+        if (error) {
+            console.log('Error updating status on statuses table: ' + error)
+            res.send('Error updating status on statuses table: ' + error)
+        } else {
+            res.redirect('/statuses')
+        }
+    });
+})
+
 // DELETE Status Request
 app.delete('/statuses/delete_status', function(req, res) {
 
@@ -590,6 +639,31 @@ app.post('/priorities/add_priority', (req, res) => {
         }
     });
 });
+
+// UPDATE Priority Request
+app.post('/priorities/update_priority', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const priorityID = req.body.modal_update_priorityID;
+    const priorityType = req.body.modal_update_priority_type;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const prioritiesUpdateQueryString =
+        `UPDATE priorities SET priorityType = ? WHERE priorityID = ?`
+    
+    const newPriorityValues = 
+    [priorityType, priorityID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(prioritiesUpdateQueryString, newPriorityValues, function(error, results, fields){
+        if (error) {
+            console.log('Error updating priority on priorities table: ' + error)
+            res.send('Error updating priority on priorities table: ' + error)
+        } else {
+            res.redirect('/priorities')
+        }
+    });
+})
 
 // DELETE Priority Request
 app.delete('/priorities/delete_priority', function(req, res) {
