@@ -31,8 +31,18 @@
           <td scope="row" class="table-id">{{projectID}}</td>
           <td class="table-name">{{name}}</td>
           <td class="table-description">{{description}}</td>
-          <td class="table-status-id">{{statusID}}</td>
-          <td class="table-priority-id">{{priorityID}}</td>
+          {{!-- <td class="table-status-id">{{statusID}}</td>
+          <td class="table-priority-id">{{priorityID}}</td> --}}
+          {{#if statusID}}
+            <td class="table-status-id">{{statusID}} &nbsp : &nbsp {{statusType}}</td>
+          {{else}}
+            <td class="table-status-id">{{statusID}}</td>
+          {{/if}}
+          {{#if priorityID}}
+            <td class="table-priority-id">{{priorityID}} &nbsp : &nbsp {{priorityType}}</td>
+          {{else}}
+            <td class="table-priority-id">{{priorityID}}</td>
+          {{/if}}
           <td class="table-start-date">{{startDate}}</td>
           <td class="table-end-date">{{endDate}}</td>
           <td class="assigned-users">

@@ -8,41 +8,45 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="update-form">
+        <form class="update-form" action="/projects/update_project" method="post">
           <input type="hidden" id="modal_update_projectID" name="modal_update_projectID" readonly>
           <div class="form-group">
             <label for="modal_update_project_name" class="col-form-label">Project Name:</label>
-            <input type="text" class="form-control" id="modal_update_project_name" placeholder="name" required>
+            <input type="text" class="form-control" id="modal_update_project_name" name="modal_update_project_name" placeholder="name" required>
           </div>
           <div class="form-group">
             <label for="modal_update_project_description" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="modal_update_project_description" placeholder="description" required></textarea>
+            <textarea class="form-control" id="modal_update_project_description" name="modal_update_project_description" placeholder="description" required></textarea>
           </div>
           <div class="form-group">
-              <label for="modal_update_project_status">Status (Note: Will be pulled from Status Table)</label>
-              <select class="form-control" id="modal_update_project_status" >
+              <label for="modal_update_project_status">Status:</label>
+              <select class="form-control" id="modal_update_project_status" name="modal_update_project_status">
                   <option></option>
-                  <option>Not Started</option> 
-                  <option>In Progress</option>
-                  <option>Complete</option>
+                {{#each statuses}}
+                  {{#if statusID}}
+                    <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                  {{/if}}
+                {{/each}}
               </select>
           </div>
           <div class="form-group">
-              <label for="modal_update_project_priority">Priority (Note: Will be pulled from Priority Table)</label>
-              <select class="form-control" id="modal_update_project_priority" >
-                  <option></option> 
-                  <option>Low</option> 
-                  <option>Medium</option>
-                  <option>High</option>
+              <label for="modal_update_project_priority">Priority:</label>
+              <select class="form-control" id="modal_update_project_priority" name="modal_update_project_priority">
+                <option></option> 
+                {{#each priorities}}
+                  {{#if priorityID}}
+                    <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                  {{/if}}
+                {{/each}}
               </select>
           </div>
           <div class="form-group">
               <label for="modal_update_project_start_date">Start Date</label>
-              <input type="date" class="form-control" id="modal_update_project_start_date" placeholder="mm/dd/yyyy" required>
+              <input type="date" class="form-control" id="modal_update_project_start_date" name="modal_update_project_start_date" placeholder="mm/dd/yyyy" required>
           </div>
           <div class="form-group">
               <label for="modal_update_project_end_date">End Date</label>
-              <input type="date" class="form-control" id="modal_update_project_end_date" placeholder="mm/dd/yyyy">
+              <input type="date" class="form-control" id="modal_update_project_end_date" name="modal_update_project_end_date" placeholder="mm/dd/yyyy">
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>

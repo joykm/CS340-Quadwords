@@ -235,10 +235,14 @@ app.delete('/issues/delete_issue', function(req, res) {
 app.get('/projects', (req, res) => {
     // DB Query String.
     var projectsQueryString = 
-	    `SELECT projectID, name, description, statusID, priorityID, 
-	    DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
-	    DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects 
-        ORDER BY projectID ASC;`
+        // Query populates the table avoiding duplications
+       `SELECT projects.projectID, projects.name, projects.description, 
+       projects.statusID, statuses.statusType, projects.priorityID,
+       priorities.priorityType, DATE_FORMAT(startDate,'%m-%d-%Y') AS startDate, 
+       DATE_FORMAT(endDate,'%m-%d-%Y') AS endDate FROM projects
+       LEFT JOIN statuses ON projects.statusID = statuses.statusID
+       LEFT JOIN priorities ON projects.priorityID = priorities.priorityID
+       ORDER BY projectID ASC;`
 
     projectsQueryString += 
         // Queries values from new table for selection even if not selected before 
@@ -265,7 +269,7 @@ app.get('/projects', (req, res) => {
             console.log('Error loading developers: ' + error)
             res.send('Error loading developers: ' + error)
         } else {
-            // console.log({results: results, projects: 1})
+            // console.log({results: results[0]})
             res.render('projects', {
                 projects: results[0],
                 statuses: results[1],
@@ -304,6 +308,45 @@ app.post('/projects/new_project', function(req, res) {
         }
     });
 });
+
+// UPDATE Project Request
+app.post('/projects/update_project', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const projectID = req.body.modal_update_projectID;
+    const name = req.body.modal_update_project_name;
+    const description = req.body.modal_update_project_description;
+    const statusID = req.body.modal_update_project_status;
+    const priorityID = req.body.modal_update_project_priority;
+    const startDate = req.body.modal_update_project_start_date;
+    const endDate = req.body.modal_update_project_end_date;
+
+    console.log(projectID)
+    console.log(name)
+    console.log(description)
+    console.log(statusID)
+    console.log(priorityID)
+    console.log(startDate)
+    console.log(endDate)
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const projectsUpdateQueryString =
+        `UPDATE projects SET name = ?, description = ?, 
+        statusID = ?, priorityID = ?, startDate = ?, endDate = ? WHERE projectID = ?`
+    
+    const newProjectValues = 
+    [name, description, statusID, priorityID, startDate, endDate, projectID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(projectsUpdateQueryString, newProjectValues, function(error, results, fields){
+        if (error) {
+            console.log('Error updating project on projects table: ' + error)
+            res.send('Error updating project on projects table: ' + error)
+        } else {
+            res.redirect('/projects')
+        }
+    });
+})
 
 // DELETE Project Request
 app.delete('/projects/delete_project', function(req, res) {
@@ -400,8 +443,8 @@ app.post('/developers/update_developer', function(req, res) {
     // Send the query, if it fails, log to console, if it succeeds, update the screen.
     connection.query(developersUpdateQueryString, newDeveloperValues, function(error, results, fields){
         if (error) {
-            console.log('Error adding developer to developers table: ' + error)
-            res.send('Error adding developer to developers table: ' + error)
+            console.log('Error updating developer on developers table: ' + error)
+            res.send('Error updating developer on developers table: ' + error)
         } else {
             res.redirect('/developers')
         }
