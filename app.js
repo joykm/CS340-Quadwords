@@ -110,10 +110,10 @@ app.get('/', (req, res) => {
 
 
 // ***
-// Issues Routes
+// issues Routes
 // ***
 
-// GET Issues Request
+// issues GET Request
 app.get('/issues', (req, res) => {
     // We are running multiple statements here. 
     // Ensure "multipleStatements: true" is added to config.js
@@ -156,10 +156,10 @@ app.get('/issues', (req, res) => {
     // Requesting the data from the database
     connection.query(issuesQueryString, function(error, results, fields){
         if (error) {
-            console.log('Error loading developers: ' + error)
-            res.send('Error loading developers: ' + error)
+            console.log('Error loading issues: ' + error)
+            res.send('Error loading issues: ' + error)
         } else {
-            // console.log({issues: results[1]})
+            // console.log({issues: results[0]})
             //access multiple statements as an array.
             res.render('issues', {
                         issues: results[0], 
@@ -172,7 +172,90 @@ app.get('/issues', (req, res) => {
     })
 });
 
-// INSERT Issue Request
+// ***
+// issue_assignments Routes
+// ***
+
+// issue_assignments GET Request
+app.get('/issue_assignments', (req, res) => {
+    // We are running multiple statements here. 
+    // Ensure "multipleStatements: true" is added to config.js
+    var issue_assignmentsQueryString =
+        // Query populates the table avoiding duplications 
+        `SELECT issue_assignments.issueID, issues.name,
+        issue_assignments.developerID, developers.firstName FROM issue_assignments
+        LEFT JOIN issues ON issue_assignments.issueID = issues.issueID
+        LEFT JOIN developers ON issue_assignments.developerID = developers.developerID
+        ORDER BY issue_assignments.issueID ASC;`
+
+        issue_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT issues.issueID, issues.name FROM issues
+        ORDER BY issues.issueID ASC;`
+
+        issue_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT developers.developerID, developers.firstName FROM developers
+        ORDER BY developers.developerID ASC;`
+
+    // Requesting the data from the database
+    connection.query(issue_assignmentsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading issue_assignments table: ' + error)
+            res.send('Error loading issue_assignments table: ' + error)
+        } else {
+            // console.log({issues: results[0]})
+            //access multiple statements as an array.
+            res.render('issue_assignments', {
+                        issue_assignments: results[0],
+                        issues: results[1],
+                        developers: results[2]
+                        })
+        }
+    })
+});
+
+// project_assignments GET Request
+app.get('/project_assignments', (req, res) => {
+    // We are running multiple statements here. 
+    // Ensure "multipleStatements: true" is added to config.js
+    var project_assignmentsQueryString =
+        // Query populates the table avoiding duplications 
+        `SELECT project_assignments.projectID, projects.name,
+        project_assignments.developerID, developers.firstName
+        FROM project_assignments
+        LEFT JOIN projects ON project_assignments.projectID = projects.projectID
+        LEFT JOIN developers ON project_assignments.developerID = developers.developerID
+        ORDER BY project_assignments.projectID ASC;`
+
+        project_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT projects.projectID, projects.name FROM projects
+        ORDER BY projects.projectID ASC;`
+
+        project_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT developers.developerID, developers.firstName FROM developers
+        ORDER BY developers.developerID ASC;`
+
+    // Requesting the data from the database
+    connection.query(project_assignmentsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading project_assignments table: ' + error)
+            res.send('Error loading project_assignments table: ' + error)
+        } else {
+            // console.log({project_assignments: results})
+            //access multiple statements as an array.
+            res.render('project_assignments', {
+                        project_assignments: results[0],
+                        projects: results[1],
+                        developers: results[2] 
+                        })
+        }
+    })
+});
+
+//  issues INSERT Request
 app.post('/issues/new_issue', function(req, res) {
 
     // Grab the necessary data from the POST request body.
@@ -202,7 +285,7 @@ app.post('/issues/new_issue', function(req, res) {
     });
 });
 
-// UPDATE Issue Request
+// issues UPDATE Request
 app.post('/issues/update_issue', function(req, res) {
 
     // Grab the necessary data from the POST request body.
@@ -234,7 +317,7 @@ app.post('/issues/update_issue', function(req, res) {
     });
 })
 
-// DELETE Issue Request
+// issues DELETE Request
 app.delete('/issues/delete_issue', function(req, res) {
 
         // Grab the necessary data from the POST request body
@@ -256,6 +339,10 @@ app.delete('/issues/delete_issue', function(req, res) {
         }
     });
 })
+
+
+
+
 
 
 
