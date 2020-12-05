@@ -1,0 +1,34 @@
+<h1 class="page-title">Project Assignments</h1>
+
+<div class="page-notes">
+  <div>Notes:</div>
+  <ul>
+      <li>This is the composite entity for the many to many relationship between the projects and developers tables.</li>
+  </ul> 
+</div>
+
+{{!-- Handlebars call to add_project_modal.hbs partial --}}
+{{> add_project_assignment_modal}}
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Project ID</th>
+      <th scope="col">Developer ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{!-- Handlebars building dynamic table from app.get request--}}
+    {{#each project_assignments}}
+      {{#if projectID}}
+        <tr class="table-statuses">
+          <td scope="row" class="table-id">{{projectID}} &nbsp : &nbsp {{name}}</td>
+          <td class="table-status-type">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
+        </tr>
+      {{/if}}
+    {{/each}}
+  </tbody>
+</table>
+
+{{!-- Handlebars call to update_project_modal.hbs partial --}}
+{{!-- {{> update_status_modal}} --}}

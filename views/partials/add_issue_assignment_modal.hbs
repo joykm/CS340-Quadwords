@@ -1,0 +1,44 @@
+<button id="addIssueAssignmentBtn" data-target="#addIssueAssignmentModal" type="button" class="btn btn-primary add-btn" data-toggle="modal" data-whatever="@getbootstrap" >Add Assignment</button>
+
+<div id="addIssueAssignmentModal" aria-labelledby="exampleLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleLabel">Add Issue Assignment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/issue_assignments/new_issue_assignment" id="add_issue_assignment_form" method="POST">
+          <div class="form-group">
+              <label for="modal_add_issue_assignment_issueID">Issue ID:</label>
+              <select class="form-control" id="modal_add_issue_assignment_issueID" name="modal_add_issue_assignment_issueID">
+                <option></option>
+                {{#each issues}}
+                  {{#if issueID}}
+                    <option>{{issueID}} &nbsp : &nbsp {{name}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_issue_assignment_developerID">Developer ID:</label>
+              <select class="form-control" id="modal_add_issue_assignment_developerID" name="modal_add_issue_assignment_developerID">
+                <option></option>
+                {{#each developers}}
+                  {{#if developerID}}
+                    <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{!-- <script src="/scripts/add_issue_assignment.js"></script> --}}

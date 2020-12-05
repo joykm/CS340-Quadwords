@@ -1,0 +1,44 @@
+<button id="addProjectAssignmentBtn" data-target="#addProjectAssignmentModal" type="button" class="btn btn-primary add-btn" data-toggle="modal" data-whatever="@getbootstrap" >Add Assignment</button>
+
+<div id="addProjectAssignmentModal" aria-labelledby="exampleLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleLabel">Add Project Assignment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/project_assignments/new_project_assignment" id="add_project_assignment_form" method="POST">
+          <div class="form-group">
+              <label for="modal_add_project_assignment_projectID">Project ID:</label>
+              <select class="form-control" id="modal_add_project_assignment_projectID" name="modal_add_project_assignment_projectID">
+                <option></option>
+                {{#each projects}}
+                  {{#if projectID}}
+                    <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="modal_add_project_assignment_developerID">Developer ID:</label>
+              <select class="form-control" id="modal_add_project_assignment_developerID" name="modal_add_project_assignment_developerID">
+                <option></option>
+                {{#each developers}}
+                  {{#if developerID}}
+                    <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{!-- <script src="/scripts/add_project_assignment.js"></script> --}}
