@@ -21,9 +21,9 @@
     {{!-- Handlebars building dynamic table from app.get request--}}
     {{#each issue_assignments}}
       {{#if issueID}}
-        <tr class="table-statuses">
-          <td scope="row" class="table-id">{{issueID}} &nbsp : &nbsp {{name}}</td>
-          <td class="table-status-type">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
+        <tr class="table-issue-assignment">
+          <td scope="row" class="table-issue-id">{{issueID}} &nbsp : &nbsp {{name}}</td>
+          <td class="table-developer-id">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
         </tr>
       {{/if}}
     {{/each}}
@@ -31,4 +31,4 @@
 </table>
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
-{{!-- {{> update_status_modal}} --}}
+{{> update_issue_assignment_modal}}

@@ -14,7 +14,7 @@
           <div class="form-group">
               <label for="modal_add_project_assignment_projectID">Project ID:</label>
               <select class="form-control" id="modal_add_project_assignment_projectID" name="modal_add_project_assignment_projectID">
-                <option></option>
+                {{!-- <option></option> --}}
                 {{#each projects}}
                   {{#if projectID}}
                     <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
@@ -25,7 +25,7 @@
           <div class="form-group">
               <label for="modal_add_project_assignment_developerID">Developer ID:</label>
               <select class="form-control" id="modal_add_project_assignment_developerID" name="modal_add_project_assignment_developerID">
-                <option></option>
+                {{!-- <option></option> --}}
                 {{#each developers}}
                   {{#if developerID}}
                     <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 

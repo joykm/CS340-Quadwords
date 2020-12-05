@@ -14,7 +14,7 @@
           <div class="form-group">
               <label for="modal_add_issue_assignment_issueID">Issue ID:</label>
               <select class="form-control" id="modal_add_issue_assignment_issueID" name="modal_add_issue_assignment_issueID">
-                <option></option>
+                {{!-- <option></option> --}}
                 {{#each issues}}
                   {{#if issueID}}
                     <option>{{issueID}} &nbsp : &nbsp {{name}}</option> 
@@ -25,7 +25,7 @@
           <div class="form-group">
               <label for="modal_add_issue_assignment_developerID">Developer ID:</label>
               <select class="form-control" id="modal_add_issue_assignment_developerID" name="modal_add_issue_assignment_developerID">
-                <option></option>
+                {{!-- <option></option> --}}
                 {{#each developers}}
                   {{#if developerID}}
                     <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 

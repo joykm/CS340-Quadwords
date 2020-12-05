@@ -215,6 +215,31 @@ app.get('/issue_assignments', (req, res) => {
     })
 });
 
+//  issue_assignmnets INSERT Request
+app.post('/issue_assignments/new_issue_assignment', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const issueID = req.body.modal_add_issue_assignment_issueID;
+    const developerID = req.body.modal_add_issue_assignment_developerID;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const issue_assignmentsInsertQueryString =
+        `INSERT INTO issue_assignments (issueID, developerID)
+        VALUES (?, ?)`
+    
+    const newIssue_assignmentsValues = [issueID, developerID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(issue_assignmentsInsertQueryString, newIssue_assignmentsValues, function(error){
+        if (error) {
+            console.log('Error adding issue assignment to issue_assignments table: ' + error)
+            res.send('Error adding issue assignment to issue_assignments table: ' + error)
+        } else {
+            res.redirect('/issue_assignments')
+        }
+    });
+});
+
 // project_assignments GET Request
 app.get('/project_assignments', (req, res) => {
     // We are running multiple statements here. 
@@ -253,6 +278,31 @@ app.get('/project_assignments', (req, res) => {
                         })
         }
     })
+});
+
+//  project_assignments INSERT Request
+app.post('/project_assignments/new_project_assignment', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const projectID = req.body.modal_add_project_assignment_projectID;
+    const developerID = req.body.modal_add_project_assignment_developerID;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const project_assignmentsInsertQueryString =
+        `INSERT INTO project_assignments (projectID, developerID)
+        VALUES (?, ?)`
+    
+    const newProject_assignmentsValues = [projectID, developerID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(project_assignmentsInsertQueryString, newProject_assignmentsValues, function(error){
+        if (error) {
+            console.log('Error adding project assignment to project_assignments table: ' + error)
+            res.send('Error adding project assignment to project_assignments table: ' + error)
+        } else {
+            res.redirect('/project_assignments')
+        }
+    });
 });
 
 //  issues INSERT Request
