@@ -13,22 +13,22 @@
         <form action="/issue_assignments/new_issue_assignment" id="add_issue_assignment_form" method="POST">
           <div class="form-group">
               <label for="modal_add_issue_assignment_issueID">Issue ID:</label>
-              <select class="form-control" id="modal_add_issue_assignment_issueID" name="modal_add_issue_assignment_issueID">
-                {{!-- <option></option> --}}
+              <select class="form-control" id="modal_add_issue_assignment_issueID" name="modal_add_issue_assignment_issueID" required>
+                <option selected disabled hidden style='display: none' value=''></option>
                 {{#each issues}}
                   {{#if issueID}}
-                    <option>{{issueID}} &nbsp : &nbsp {{name}}</option> 
+                    <option>{{issueID}} &nbsp ({{name}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
           </div>
           <div class="form-group">
               <label for="modal_add_issue_assignment_developerID">Developer ID:</label>
-              <select class="form-control" id="modal_add_issue_assignment_developerID" name="modal_add_issue_assignment_developerID">
-                {{!-- <option></option> --}}
+              <select class="form-control" id="modal_add_issue_assignment_developerID" name="modal_add_issue_assignment_developerID" required>
+                <option selected disabled hidden style='display: none' value=''></option>
                 {{#each developers}}
                   {{#if developerID}}
-                    <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 
+                    <option>{{developerID}} &nbsp ({{firstName}})</option> 
                   {{/if}}
                 {{/each}}
               </select>

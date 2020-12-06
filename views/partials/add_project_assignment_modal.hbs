@@ -13,22 +13,23 @@
         <form action="/project_assignments/new_project_assignment" id="add_project_assignment_form" method="POST">
           <div class="form-group">
               <label for="modal_add_project_assignment_projectID">Project ID:</label>
-              <select class="form-control" id="modal_add_project_assignment_projectID" name="modal_add_project_assignment_projectID">
-                {{!-- <option></option> --}}
+              <select class="form-control" id="modal_add_project_assignment_projectID" name="modal_add_project_assignment_projectID" required>
+                <option selected disabled hidden style='display: none' value=''></option>
+
                 {{#each projects}}
                   {{#if projectID}}
-                    <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                    <option>{{projectID}} &nbsp ({{name}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
           </div>
           <div class="form-group">
               <label for="modal_add_project_assignment_developerID">Developer ID:</label>
-              <select class="form-control" id="modal_add_project_assignment_developerID" name="modal_add_project_assignment_developerID">
-                {{!-- <option></option> --}}
+              <select class="form-control" id="modal_add_project_assignment_developerID" name="modal_add_project_assignment_developerID" required>
+                <option selected disabled hidden style='display: none' value=''></option>
                 {{#each developers}}
                   {{#if developerID}}
-                    <option>{{developerID}} &nbsp : &nbsp {{firstName}}</option> 
+                    <option>{{developerID}} &nbsp ({{firstName}})</option> 
                   {{/if}}
                 {{/each}}
               </select>

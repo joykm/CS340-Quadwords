@@ -25,7 +25,7 @@
                 <option></option>
                 {{#each projects}}
                   {{#if projectID}}
-                    <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                    <option>{{projectID}} &nbsp ({{name}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
@@ -36,7 +36,7 @@
                 <option></option>
                 {{#each statuses}}
                   {{#if statusID}}
-                    <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                    <option>{{statusID}} &nbsp ({{statusType}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
@@ -47,7 +47,7 @@
                 <option></option>
                 {{#each priorities}}
                   {{#if priorityID}}
-                    <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                    <option>{{priorityID}} &nbsp ({{priorityType}})</option> 
                   {{/if}}
                 {{/each}}
               </select>

@@ -27,8 +27,8 @@
     {{#each project_assignments}}
       {{#if projectID}}
         <tr class="table-project-assignment">
-          <td scope="row" class="table-project-id">{{projectID}} &nbsp : &nbsp {{name}}</td>
-          <td class="table-developer-id">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
+          <td scope="row" class="table-project-id">{{projectID}} &nbsp ({{name}})</td>
+          <td class="table-developer-id">{{developerID}} &nbsp ({{firstName}})</td>
         </tr>
       {{/if}}
     {{/each}}

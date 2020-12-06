@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="update-form" action="/issues/update_issue" method="post">
+        <form id="update-issue-form" class="update-form" action="/issues/update_issue" method="post">
           <input type="hidden" id="modal_update_issueID" name="modal_update_issueID" readonly>
           <div class="form-group">
             <label for="modal_update_issue_name" class="col-form-label">Issue Name:</label>
@@ -24,7 +24,7 @@
                 <option></option>
                 {{#each projects}}
                   {{#if projectID}}
-                  <option>{{projectID}} &nbsp : &nbsp {{name}}</option> 
+                  <option>{{projectID}} &nbsp ({{name}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
@@ -35,7 +35,7 @@
                 <option></option>
                 {{#each statuses}}
                   {{#if statusID}}
-                  <option>{{statusID}} &nbsp : &nbsp {{statusType}}</option> 
+                  <option>{{statusID}} &nbsp ({{statusType}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
@@ -46,7 +46,7 @@
                 <option></option>
                 {{#each priorities}}
                   {{#if priorityID}}
-                  <option>{{priorityID}} &nbsp : &nbsp {{priorityType}}</option> 
+                  <option>{{priorityID}} &nbsp ({{priorityType}})</option> 
                   {{/if}}
                 {{/each}}
               </select>
