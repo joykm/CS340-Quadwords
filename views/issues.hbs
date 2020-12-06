@@ -49,9 +49,9 @@
           {{/if}}
           <td class="table-date-raised">{{dateRaised}}</td>
           <td class="table-date-closed">{{dateClosed}}</td>
-          <td class="assigned-users">
+          {{!-- <td class="assigned-users">
             <span class="users-btn material-icons">people_alt</span>
-          </td>
+          </td> --}}
         </tr>
       {{/if}}
     {{/each}}
@@ -59,7 +59,7 @@
 </table>
 
 {{!-- Handlebars call to view_assigned_users_modal.hbs partial --}}
-{{> issues_assigned_users_modal}}
+{{!-- {{> issues_assigned_users_modal}} --}}
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_issue_modal}}

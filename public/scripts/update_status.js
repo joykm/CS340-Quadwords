@@ -28,12 +28,6 @@ for (var row of table_rows) {
     }(row))
 }
 
-// Event listener on modal form submission button
-var form = document.getElementsByClassName('update-form')[0]
-form.addEventListener('submit', function(event) {
-    // Update the data here when the database is created
-})
-
 // Event listener on delete button within modal form
 var deleteBtn = document.getElementById("delete-btn")
 deleteBtn.addEventListener("click", function() {

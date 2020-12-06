@@ -45,9 +45,9 @@
           {{/if}}
           <td class="table-start-date">{{startDate}}</td>
           <td class="table-end-date">{{endDate}}</td>
-          <td class="assigned-users">
+          {{!-- <td class="assigned-users">
             <span class="users-btn material-icons">people_alt</span>
-          </td>
+          </td> --}}
         </tr>
       {{/if}}
     {{/each}}
@@ -55,7 +55,7 @@
 </table>
 
 {{!-- Handlebars call to view_assigned_users_modal.hbs partial --}}
-{{> view_assigned_users_modal}}
+{{!-- {{> view_assigned_users_modal}} --}}
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_project_modal}}
