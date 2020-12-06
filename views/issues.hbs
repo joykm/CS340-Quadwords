@@ -33,21 +33,22 @@
           <td class="table-name">{{name}}</td>
           <td class="table-description">{{description}}</td>
           {{#if projectID}}
-            <td class="table-project-id">{{projectID}} &nbsp : &nbsp {{projectName}}</td>
+            <td class="table-project-id">{{projectID}} &nbsp ({{projectName}})</td>
           {{else}}
             <td class="table-project-id">{{projectID}}</td>
           {{/if}}
           {{#if statusID}}
-            <td class="table-status-id">{{statusID}} &nbsp : &nbsp {{statusType}}</td>
+            <td class="table-status-id">{{statusID}} &nbsp ({{statusType}})</td>
           {{else}}
             <td class="table-status-id">{{statusID}}</td>
           {{/if}}
           {{#if priorityID}}
-            <td class="table-priority-id">{{priorityID}} &nbsp : &nbsp {{priorityType}}</td>
+            <td class="table-priority-id">{{priorityID}} &nbsp ({{priorityType}})</td>
           {{else}}
             <td class="table-priority-id">{{priorityID}}</td>
           {{/if}}
           <td class="table-date-raised">{{dateRaised}}</td>
+
           <td class="table-date-closed">{{dateClosed}}</td>
           {{!-- <td class="assigned-users">
             <span class="users-btn material-icons">people_alt</span>

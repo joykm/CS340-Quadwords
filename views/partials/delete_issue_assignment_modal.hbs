@@ -12,12 +12,12 @@
       <div class="modal-body">
          <form class="update-form">
           <div class="form-group">
-              <label for="modal_delete_issue_assignment">Issue <---> Developer:</label>
+              <label for="modal_delete_issue_assignment">Issue ID <---> Developer ID:</label>
               <select class="form-control" id="modal_delete_issue_assignment" name="modal_delete_issue_assignment" required>
                 {{!-- <option></option> --}}
                 {{#each issue_assignments}}
                   {{#if issueID}}
-                    <option>({{issueID}})&nbsp{{name}} &nbsp&nbsp<--->&nbsp&nbsp ({{developerID}})&nbsp{{firstName}}</option>
+                    <option>{{issueID}} &nbsp ({{name}}) &nbsp&nbsp<--->&nbsp&nbsp {{developerID}} &nbsp ({{firstName}})</option>
                   {{/if}}
                 {{/each}}
               </select>

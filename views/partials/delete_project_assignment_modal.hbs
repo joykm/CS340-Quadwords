@@ -17,7 +17,7 @@
                 {{!-- <option></option> --}}
                 {{#each project_assignments}}
                   {{#if projectID}}
-                    <option>({{projectID}})&nbsp{{name}} &nbsp&nbsp<--->&nbsp&nbsp ({{developerID}})&nbsp{{firstName}}</option>
+                    <option>{{projectID}} &nbsp ({{name}}) &nbsp&nbsp<--->&nbsp&nbsp {{developerID}} &nbsp ({{firstName}})</option>
                   {{/if}}
                 {{/each}}
               </select>

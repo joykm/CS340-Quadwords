@@ -19,6 +19,24 @@ for (var row of table_rows) {
             var priority = row.querySelector('.table-priority-id').innerHTML
             var dateRaised = row.querySelector('.table-date-raised').innerHTML
             var dateClosed = row.querySelector('.table-date-closed').innerHTML
+
+            // Clean up text inputs.
+            project = project.replace("&nbsp;", "")
+            status = status.replace("&nbsp;", "")
+            priority = priority.replace("&nbsp;", "")
+            
+            // Remove all whitespace from string.
+            project = project.replace(/\s/g,'')
+            status = status.replace(/\s/g,'')
+            priority = priority.replace(/\s/g,'')
+            dateRaised = dateRaised.replace(/\s/g,'')
+            dateClosed = dateClosed.replace(/\s/g,'')
+
+            // Reverse date format for html form.
+            dateRaised = dateRaised.split('-')
+            dateRaised = dateRaised[2] + '-' + dateRaised[0] + '-' + dateRaised[1]
+            dateClosed = dateClosed.split('-')
+            dateClosed = dateClosed[2] + '-' + dateClosed[0] + '-' + dateClosed[1]
             
             // Get access to the input feilds in the form.
             var modalIssueID = document.querySelector('#modal_update_issueID')
@@ -27,18 +45,50 @@ for (var row of table_rows) {
             var modalInputProject = document.querySelector('#modal_update_issue_project')
             var modalInputStatus = document.querySelector('#modal_update_issue_status')
             var modalInputPriority = document.querySelector('#modal_update_issue_priority')
-            var modalInputDateRaised = document.querySelector('#modal_update_issue_date_raised')
-            var modalInputDateClosed = document.querySelector('#modal_update_issue_date_closed')
 
-            // Populate the input fields with the previous data.
+
+            // Populate text input fields with the previous data.
             modalIssueID.value = issueID
             modalInputName.value = name
             modalInputDescription.value = description
-            modalInputProject.value = project
-            modalInputStatus.value = status
-            modalInputPriority.value = priority
-            modalInputDateRaised.value = dateRaised
-            modalInputDateClosed.value = dateClosed
+
+            // Populate date input fields with previousu data.
+            document.getElementById('modal_update_issue_date_raised').value = dateRaised
+            document.getElementById('modal_update_issue_date_closed').value = dateClosed
+
+
+            // Populate dropdown menus with previous data.
+            for(var i, j = 0; i = modalInputProject.options[j]; j++) {
+                cleanTxt = i.value
+
+                // Remove all whitespace from string
+                cleanTxt = cleanTxt.replace(/\s/g,'')
+                if(cleanTxt == project) {
+                    modalInputProject.selectedIndex = j;
+                    break;
+                }
+            }
+            for(var i, j = 0; i = modalInputStatus.options[j]; j++) {
+                cleanTxt = i.value
+
+                // Remove all whitespace from string
+                cleanTxt = cleanTxt.replace(/\s/g,'')
+                if(cleanTxt == status) {
+                    modalInputStatus.selectedIndex = j;
+                    break;
+                }
+            }
+            for(var i, j = 0; i = modalInputPriority.options[j]; j++) {
+                cleanTxt = i.value
+
+                // Remove all whitespace from string
+                cleanTxt = cleanTxt.replace(/\s/g,'')
+                if(cleanTxt == priority) {
+                    modalInputPriority.selectedIndex = j;
+                    break;
+                }
+            }
+
             
             // Bootstrap code to make the model appear.
             $("#updateIssueModal").modal("show")
@@ -52,9 +102,27 @@ for (var row of table_rows) {
 }
 
 // Event listener on modal form submission button
-var form = document.getElementsByClassName('update-form')[0]
-form.addEventListener('submit', function(event) {
+document.getElementById("update-issue-form").addEventListener("submit", function(e){
+    e.preventDefault()
+
+    // Get access to the input feilds in the form.
+    var modalInputProject = document.querySelector('#modal_update_issue_project')
+    var modalInputStatus = document.querySelector('#modal_update_issue_status')
+    var modalInputPriority = document.querySelector('#modal_update_issue_priority')
+
+    // Ensure null values are submited for foriegn key fields, as opposed to empty strings.
+    if (modalInputProject.value == "") {
+        modalInputProject.value = null 
+    }
+    if (modalInputStatus.value == "") {
+        modalInputStatus.value = null 
+    }
+    if (modalInputPriority.value == "") {
+        modalInputPriority.value = null 
+    }
+
     // Update the data here when the database is created
+    document.getElementById('update-issue-form').submit(); 
 })
 
 // Event listener on delete button within modal form
