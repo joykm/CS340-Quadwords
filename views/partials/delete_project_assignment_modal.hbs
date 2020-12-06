@@ -1,0 +1,36 @@
+<button id="deleteProjectAssignmentBtn" data-target="#deleteProjectAssignment" type="button" class="btn btn-danger add-btn" data-toggle="modal" data-whatever="@getbootstrap" >Delete Assignment</button>
+
+<div id="deleteProjectAssignment" aria-labelledby="exampleLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleLabel">Delete Project Assignment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form class="update-form">
+          <div class="form-group">
+              <label for="modal_delete_project_assignment">Project ID:</label>
+              <select class="form-control" id="modal_delete_project_assignment" name="modal_delete_project_assignment" required>
+                {{!-- <option></option> --}}
+                {{#each project_assignments}}
+                  {{#if projectID}}
+                    <option>({{projectID}})&nbsp{{name}} &nbsp&nbsp<--->&nbsp&nbsp ({{developerID}})&nbsp{{firstName}}</option>
+                  {{/if}}
+                {{/each}}
+              </select>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button id="delete-btn" type="button" class="btn btn-danger delete-btn" >Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/scripts/delete_project_assignment.js"></script>
+
+
+

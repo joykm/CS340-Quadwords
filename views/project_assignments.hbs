@@ -7,8 +7,13 @@
   </ul> 
 </div>
 
-{{!-- Handlebars call to add_project_modal.hbs partial --}}
-{{> add_project_assignment_modal}}
+<div class="d-flex justify-content-between">
+  {{!-- Handlebars call to add_project_modal.hbs partial --}}
+  {{> add_project_assignment_modal}}
+
+  {{!-- Handlebars call to update_project_modal.hbs partial --}}
+  {{> delete_project_assignment_modal}}
+</div>
 
 <table>
   <thead>
@@ -21,14 +26,11 @@
     {{!-- Handlebars building dynamic table from app.get request--}}
     {{#each project_assignments}}
       {{#if projectID}}
-        <tr class="table-statuses">
-          <td scope="row" class="table-id">{{projectID}} &nbsp : &nbsp {{name}}</td>
-          <td class="table-status-type">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
+        <tr class="table-project-assignment">
+          <td scope="row" class="table-project-id">{{projectID}} &nbsp : &nbsp {{name}}</td>
+          <td class="table-developer-id">{{developerID}} &nbsp : &nbsp {{firstName}}</td>
         </tr>
       {{/if}}
     {{/each}}
   </tbody>
 </table>
-
-{{!-- Handlebars call to update_project_modal.hbs partial --}}
-{{!-- {{> update_status_modal}} --}}
