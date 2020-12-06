@@ -18,7 +18,9 @@
     {{> navbar}}
     {{!-- Body --}}
     <div class="main-body">{{{body}}}</div>
-        
+
+    {{!-- Force 0000-00-00 cleardb date format to Null --}}
+    <script src="/scripts/null_dates.js"></script>
 
     <!-- Required for Bootstrap - jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
