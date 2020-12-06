@@ -7,8 +7,13 @@
   </ul> 
 </div>
 
-{{!-- Handlebars call to add_project_modal.hbs partial --}}
-{{> add_issue_assignment_modal}}
+<div class="d-flex justify-content-between">
+  {{!-- Handlebars call to add_project_modal.hbs partial --}}
+  {{> add_issue_assignment_modal}}
+
+  {{!-- Handlebars call to delete_project_modal.hbs partial --}}
+  {{> delete_issue_assignment_modal}}
+</div>
 
 <table>
   <thead>
@@ -30,5 +35,3 @@
   </tbody>
 </table>
 
-{{!-- Handlebars call to update_project_modal.hbs partial --}}
-{{> update_issue_assignment_modal}}

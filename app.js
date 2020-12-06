@@ -172,139 +172,6 @@ app.get('/issues', (req, res) => {
     })
 });
 
-// ***
-// issue_assignments Routes
-// ***
-
-// issue_assignments GET Request
-app.get('/issue_assignments', (req, res) => {
-    // We are running multiple statements here. 
-    // Ensure "multipleStatements: true" is added to config.js
-    var issue_assignmentsQueryString =
-        // Query populates the table avoiding duplications 
-        `SELECT issue_assignments.issueID, issues.name,
-        issue_assignments.developerID, developers.firstName FROM issue_assignments
-        LEFT JOIN issues ON issue_assignments.issueID = issues.issueID
-        LEFT JOIN developers ON issue_assignments.developerID = developers.developerID
-        ORDER BY issue_assignments.issueID ASC;`
-
-        issue_assignmentsQueryString += 
-        // Queries values from new table for selection even if not selected before
-        `SELECT issues.issueID, issues.name FROM issues
-        ORDER BY issues.issueID ASC;`
-
-        issue_assignmentsQueryString += 
-        // Queries values from new table for selection even if not selected before
-        `SELECT developers.developerID, developers.firstName FROM developers
-        ORDER BY developers.developerID ASC;`
-
-    // Requesting the data from the database
-    connection.query(issue_assignmentsQueryString, function(error, results, fields){
-        if (error) {
-            console.log('Error loading issue_assignments table: ' + error)
-            res.send('Error loading issue_assignments table: ' + error)
-        } else {
-            // console.log({issues: results[0]})
-            //access multiple statements as an array.
-            res.render('issue_assignments', {
-                        issue_assignments: results[0],
-                        issues: results[1],
-                        developers: results[2]
-                        })
-        }
-    })
-});
-
-//  issue_assignmnets INSERT Request
-app.post('/issue_assignments/new_issue_assignment', function(req, res) {
-
-    // Grab the necessary data from the POST request body.
-    const issueID = req.body.modal_add_issue_assignment_issueID;
-    const developerID = req.body.modal_add_issue_assignment_developerID;
-
-    // DB Query String. Designed with array below to prevent SQL injection.
-    const issue_assignmentsInsertQueryString =
-        `INSERT INTO issue_assignments (issueID, developerID)
-        VALUES (?, ?)`
-    
-    const newIssue_assignmentsValues = [issueID, developerID]
-
-    // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(issue_assignmentsInsertQueryString, newIssue_assignmentsValues, function(error){
-        if (error) {
-            console.log('Error adding issue assignment to issue_assignments table: ' + error)
-            res.send('Error adding issue assignment to issue_assignments table: ' + error)
-        } else {
-            res.redirect('/issue_assignments')
-        }
-    });
-});
-
-// project_assignments GET Request
-app.get('/project_assignments', (req, res) => {
-    // We are running multiple statements here. 
-    // Ensure "multipleStatements: true" is added to config.js
-    var project_assignmentsQueryString =
-        // Query populates the table avoiding duplications 
-        `SELECT project_assignments.projectID, projects.name,
-        project_assignments.developerID, developers.firstName
-        FROM project_assignments
-        LEFT JOIN projects ON project_assignments.projectID = projects.projectID
-        LEFT JOIN developers ON project_assignments.developerID = developers.developerID
-        ORDER BY project_assignments.projectID ASC;`
-
-        project_assignmentsQueryString += 
-        // Queries values from new table for selection even if not selected before
-        `SELECT projects.projectID, projects.name FROM projects
-        ORDER BY projects.projectID ASC;`
-
-        project_assignmentsQueryString += 
-        // Queries values from new table for selection even if not selected before
-        `SELECT developers.developerID, developers.firstName FROM developers
-        ORDER BY developers.developerID ASC;`
-
-    // Requesting the data from the database
-    connection.query(project_assignmentsQueryString, function(error, results, fields){
-        if (error) {
-            console.log('Error loading project_assignments table: ' + error)
-            res.send('Error loading project_assignments table: ' + error)
-        } else {
-            // console.log({project_assignments: results})
-            //access multiple statements as an array.
-            res.render('project_assignments', {
-                        project_assignments: results[0],
-                        projects: results[1],
-                        developers: results[2] 
-                        })
-        }
-    })
-});
-
-//  project_assignments INSERT Request
-app.post('/project_assignments/new_project_assignment', function(req, res) {
-
-    // Grab the necessary data from the POST request body.
-    const projectID = req.body.modal_add_project_assignment_projectID;
-    const developerID = req.body.modal_add_project_assignment_developerID;
-
-    // DB Query String. Designed with array below to prevent SQL injection.
-    const project_assignmentsInsertQueryString =
-        `INSERT INTO project_assignments (projectID, developerID)
-        VALUES (?, ?)`
-    
-    const newProject_assignmentsValues = [projectID, developerID]
-
-    // Send the query, if it fails, log to console, if it succeeds, update the screen.
-    connection.query(project_assignmentsInsertQueryString, newProject_assignmentsValues, function(error){
-        if (error) {
-            console.log('Error adding project assignment to project_assignments table: ' + error)
-            res.send('Error adding project assignment to project_assignments table: ' + error)
-        } else {
-            res.redirect('/project_assignments')
-        }
-    });
-});
-
 //  issues INSERT Request
 app.post('/issues/new_issue', function(req, res) {
 
@@ -392,7 +259,98 @@ app.delete('/issues/delete_issue', function(req, res) {
 
 
 
+// ***
+// issue_assignments Routes
+// ***
 
+// issue_assignments GET Request
+app.get('/issue_assignments', (req, res) => {
+    // We are running multiple statements here. 
+    // Ensure "multipleStatements: true" is added to config.js
+    var issue_assignmentsQueryString =
+        // Query populates the table avoiding duplications 
+        `SELECT issue_assignments.issueID, issues.name,
+        issue_assignments.developerID, developers.firstName FROM issue_assignments
+        LEFT JOIN issues ON issue_assignments.issueID = issues.issueID
+        LEFT JOIN developers ON issue_assignments.developerID = developers.developerID
+        ORDER BY issue_assignments.issueID ASC;`
+
+        issue_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT issues.issueID, issues.name FROM issues
+        ORDER BY issues.issueID ASC;`
+
+        issue_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT developers.developerID, developers.firstName FROM developers
+        ORDER BY developers.developerID ASC;`
+
+    // Requesting the data from the database
+    connection.query(issue_assignmentsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading issue_assignments table: ' + error)
+            res.send('Error loading issue_assignments table: ' + error)
+        } else {
+            // console.log({issues: results[0]})
+            //access multiple statements as an array.
+            res.render('issue_assignments', {
+                        issue_assignments: results[0],
+                        issues: results[1],
+                        developers: results[2]
+                        })
+        }
+    })
+});
+
+//  issue_assignmnets INSERT Request
+app.post('/issue_assignments/new_issue_assignment', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const issueID = req.body.modal_add_issue_assignment_issueID;
+    const developerID = req.body.modal_add_issue_assignment_developerID;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const issue_assignmentsInsertQueryString =
+        `INSERT INTO issue_assignments (issueID, developerID)
+        VALUES (?, ?)`
+    
+    const newIssue_assignmentsValues = [issueID, developerID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(issue_assignmentsInsertQueryString, newIssue_assignmentsValues, function(error){
+        if (error) {
+            console.log('Error adding issue assignment to issue_assignments table: ' + error)
+            res.send('Error adding issue assignment to issue_assignments table: ' + error)
+        } else {
+            res.redirect('/issue_assignments')
+        }
+    });
+});
+
+// issue_assignmnets DELETE Request
+app.delete('/issue_assignments/delete_issue_assignment', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const issueID = req.body.issueID;
+        const developerID = req.body.developerID;
+
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const issueAssignmnetsDeleteQueryString =
+            `DELETE FROM issue_assignments WHERE issueID = ? AND developerID = ?`
+
+        const deleteIssueAssignmnetsValue = [issueID, developerID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(issueAssignmnetsDeleteQueryString, deleteIssueAssignmnetsValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting issue assignment from issue_assignments table: ' + error);
+            res.send('Error deleting issue assignment from issue_assignments table: ' + error);
+        } else {
+            res.redirect(303, '/issue_assignments');
+        }
+    });
+})
 
 
 
@@ -528,6 +486,102 @@ app.delete('/projects/delete_project', function(req, res) {
             res.send('Error deleting project from projects table: ' + error);
         } else {
             res.redirect(303, '/projects');
+        }
+    });
+})
+
+
+
+// ***
+// project_assignments Routes
+// ***
+
+// project_assignments GET Request
+app.get('/project_assignments', (req, res) => {
+    // We are running multiple statements here. 
+    // Ensure "multipleStatements: true" is added to config.js
+    var project_assignmentsQueryString =
+        // Query populates the table avoiding duplications 
+        `SELECT project_assignments.projectID, projects.name,
+        project_assignments.developerID, developers.firstName
+        FROM project_assignments
+        LEFT JOIN projects ON project_assignments.projectID = projects.projectID
+        LEFT JOIN developers ON project_assignments.developerID = developers.developerID
+        ORDER BY project_assignments.projectID ASC;`
+
+        project_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT projects.projectID, projects.name FROM projects
+        ORDER BY projects.projectID ASC;`
+
+        project_assignmentsQueryString += 
+        // Queries values from new table for selection even if not selected before
+        `SELECT developers.developerID, developers.firstName FROM developers
+        ORDER BY developers.developerID ASC;`
+
+    // Requesting the data from the database
+    connection.query(project_assignmentsQueryString, function(error, results, fields){
+        if (error) {
+            console.log('Error loading project_assignments table: ' + error)
+            res.send('Error loading project_assignments table: ' + error)
+        } else {
+            // console.log({project_assignments: results})
+            //access multiple statements as an array.
+            res.render('project_assignments', {
+                        project_assignments: results[0],
+                        projects: results[1],
+                        developers: results[2] 
+                        })
+        }
+    })
+});
+
+//  project_assignments INSERT Request
+app.post('/project_assignments/new_project_assignment', function(req, res) {
+
+    // Grab the necessary data from the POST request body.
+    const projectID = req.body.modal_add_project_assignment_projectID;
+    const developerID = req.body.modal_add_project_assignment_developerID;
+
+    // DB Query String. Designed with array below to prevent SQL injection.
+    const project_assignmentsInsertQueryString =
+        `INSERT INTO project_assignments (projectID, developerID)
+        VALUES (?, ?)`
+    
+    const newProject_assignmentsValues = [projectID, developerID]
+
+    // Send the query, if it fails, log to console, if it succeeds, update the screen.
+    connection.query(project_assignmentsInsertQueryString, newProject_assignmentsValues, function(error){
+        if (error) {
+            console.log('Error adding project assignment to project_assignments table: ' + error)
+            res.send('Error adding project assignment to project_assignments table: ' + error)
+        } else {
+            res.redirect('/project_assignments')
+        }
+    });
+});
+
+// project_assignmnets DELETE Request
+app.delete('/project_assignments/delete_project_assignment', function(req, res) {
+
+        // Grab the necessary data from the POST request body
+        const projectID = req.body.projectID;
+        const developerID = req.body.developerID;
+
+
+        // DB Query String. Designed with array below to prevent SQL injection.
+        const projectAssignmnetsDeleteQueryString =
+            `DELETE FROM project_assignments WHERE projectID = ? AND developerID = ?`
+
+        const deleteProjectAssignmnetsValue = [projectID, developerID]
+
+        // Send the query, if it fails, log to console, if it succeeds, update the screen.
+        connection.query(projectAssignmnetsDeleteQueryString, deleteProjectAssignmnetsValue, function(error, results, fields){
+        if (error) {
+            console.log('Error deleting project assignment from project_assignments table: ' + error);
+            res.send('Error deleting project assignment from project_assignments table: ' + error);
+        } else {
+            res.redirect(303, '/project_assignments');
         }
     });
 })
