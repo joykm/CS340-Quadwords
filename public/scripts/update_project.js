@@ -41,10 +41,10 @@ for (var row of table_rows) {
             $("#updateProjectModal").modal("show")
         })
         // Get cell containing user assignment button and remove edit event
-        var assignedUsersButton = row.getElementsByClassName('assigned-users')[0]
-        assignedUsersButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+        // var assignedUsersButton = row.getElementsByClassName('assigned-users')[0]
+        // assignedUsersButton.addEventListener('click', function(e) {
+        //     e.stopPropagation();
+        // });
     }(row))
 }
 

@@ -35,18 +35,12 @@ for (var row of table_rows) {
             $("#updateDeveloperModal").modal("show")
         })
         // Get cell containing user assignment button and remove edit event
-        var assignedUsersButton = row.getElementsByClassName('assigned-users')[0]
-        assignedUsersButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+        // var assignedUsersButton = row.getElementsByClassName('assigned-users')[0]
+        // assignedUsersButton.addEventListener('click', function(e) {
+        //     e.stopPropagation();
+        // });
     }(row))
 }
-
-// Event listener on modal form submission button
-var form = document.getElementsByClassName('update-form')[0]
-form.addEventListener('submit', function(event) {
-    // Update the data here when the database is created
-})
 
 // Event listener on delete button within modal form
 var deleteBtn = document.getElementById("delete-btn")

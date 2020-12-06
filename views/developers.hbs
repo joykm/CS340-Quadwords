@@ -31,9 +31,9 @@
           <td class="table-last-name">{{lastName}}</td>
           <td class="table-title">{{title}}</td>
           <td class="table-email">{{email}}</td>
-          <td class="assigned-users">
+          {{!-- <td class="assigned-users">
             <span class="users-btn material-icons">work</span>
-          </td>
+          </td> --}}
         </tr>
       {{/if}}
     {{/each}}
@@ -41,7 +41,7 @@
 </table>
 
 {{!-- Handlebars call to view_assigned_users_modal.hbs partial --}}
-{{> view_assigned_users_modal}}
+{{!-- {{> view_assigned_users_modal}} --}}
 
 {{!-- Handlebars call to update_project_modal.hbs partial --}}
 {{> update_developer_modal}}
